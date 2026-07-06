@@ -227,6 +227,31 @@
     .budget-hd .lbl{grid-column:1 / -1;}
   }
 
+  /* ---------- WhatsApp share ---------- */
+  .wa-share{
+    display:inline-flex; align-items:center; gap:10px; margin-top:22px;
+    background:#25D366; color:#0a2a17; font-weight:800; font-size:.98rem;
+    padding:12px 20px; border-radius:999px; text-decoration:none;
+    box-shadow:0 6px 18px rgba(37,211,102,.35); transition:transform .12s, box-shadow .12s;
+  }
+  .wa-share:hover{transform:translateY(-1px); box-shadow:0 9px 24px rgba(37,211,102,.45);}
+  .wa-share:active{transform:translateY(0);}
+  .wa-share svg{width:22px; height:22px; fill:#0a2a17; flex:0 0 auto;}
+  .wa-share:focus-visible{outline:3px solid var(--teal); outline-offset:3px;}
+
+  .wa-fab{
+    position:fixed; right:18px; bottom:18px; z-index:50;
+    width:58px; height:58px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:#25D366; box-shadow:0 8px 22px rgba(0,0,0,.25); text-decoration:none;
+    transition:transform .14s;
+  }
+  .wa-fab:hover{transform:scale(1.06);}
+  .wa-fab svg{width:30px; height:30px; fill:#fff;}
+  .wa-fab:focus-visible{outline:3px solid #fff; outline-offset:2px;}
+  @media(prefers-reduced-motion:reduce){ .wa-share,.wa-fab{transition:none;} }
+  @media print{ .wa-share,.wa-fab{display:none;} }
+
   /* ---------- Footer ---------- */
   footer{
     margin-top:52px; padding-top:22px; border-top:1px solid var(--line);
@@ -247,6 +272,11 @@
     <span class="eyebrow">El Paseo 9 · 18–20 Julio 2026</span>
     <h1>Plan de <span class="sun">mercado &amp; comidas</span><br>en Capitanejo</h1>
     <p class="tagline">Casa completa con piscina cerca de San José de Miranda. Aquí está el menú de los tres días, el mercado con cantidades y quién se encarga de cada comida — para llegar cuadrados a la reunión y no improvisar.</p>
+
+    <a class="wa-share" href="https://wa.me/?text=" target="_blank" rel="noopener" aria-label="Compartir el plan por WhatsApp">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.4 2 7.7L.4 31.5l7.9-2.1c2.2 1.2 4.8 1.9 7.5 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.5 16 .5zm0 28.3c-2.5 0-4.8-.7-6.8-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5C3.9 20.9 3.2 18.5 3.2 16 3.2 8.9 8.9 3.2 16 3.2S28.8 8.9 28.8 16 23.1 28.8 16 28.8zm7.1-9.6c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.7-.6-.6-.9-.6h-.7c-.2 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.3 2.6 4 6.3 5.6.9.4 1.6.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg>
+      Compartir por WhatsApp
+    </a>
 
     <div class="facts">
       <div class="fact"><div class="k">Personas</div><div class="v">24</div><div class="u">20 adultos + 4 niños</div></div>
@@ -500,6 +530,21 @@
   </footer>
 
 </div>
+
+<a class="wa-fab" href="https://wa.me/?text=" target="_blank" rel="noopener" aria-label="Compartir el plan por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.4 2 7.7L.4 31.5l7.9-2.1c2.2 1.2 4.8 1.9 7.5 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.5 16 .5zm0 28.3c-2.5 0-4.8-.7-6.8-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5C3.9 20.9 3.2 18.5 3.2 16 3.2 8.9 8.9 3.2 16 3.2S28.8 8.9 28.8 16 23.1 28.8 16 28.8zm7.1-9.6c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.2-1.3-3-.3-.7-.6-.6-.9-.6h-.7c-.2 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.3 2.6 4 6.3 5.6.9.4 1.6.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg>
+</a>
+
+<script>
+  (function(){
+    var url = "https://hgomezgonzalez.github.io/paseo-9-capitanejo/";
+    var msg = "🏞️🍔 *Plan del Paseo 9 — Capitanejo* (18–20 jul)\n\n"
+            + "Menú por día, mercado con costos y quién cocina cada comida 👇\n" + url;
+    var href = "https://wa.me/?text=" + encodeURIComponent(msg);
+    var links = document.querySelectorAll(".wa-share, .wa-fab");
+    for (var i = 0; i < links.length; i++){ links[i].setAttribute("href", href); }
+  })();
+</script>
 
 </body>
 </html>
