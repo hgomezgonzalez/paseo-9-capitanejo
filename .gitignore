@@ -1,0 +1,6 @@
+# Publicar SOLO el plan (index.html) y el README.
+# Todo lo demás (capturas y transcript privados de WhatsApp, temporales) queda fuera.
+*
+!index.html
+!README.md
+!.gitignore

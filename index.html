@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Plan de mercado, menu y organizacion del Paseo 9 en Capitanejo (24 personas, 18-20 jul 2026).">
+<title>Plan Paseo 9 — Capitanejo</title>
+<style>
+  :root {
+    --paper:#FBF6EC; --surface:#FFFDF8; --surface-2:#F5EEDF;
+    --ink:#221F1A; --ink-soft:#6B6456; --line:#E7DCC7;
+    --mango:#D8761A; --mango-soft:#F6E4CE;
+    --teal:#0E8C86; --teal-soft:#D5EBE8;
+    --leaf:#5C7C33; --leaf-soft:#E3ECCF;
+    --shadow:0 1px 2px rgba(60,45,20,.06), 0 6px 20px rgba(60,45,20,.06);
+    --radius:16px;
+    --maxw:820px;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Helvetica Neue",Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#131F1D; --surface:#1B2725; --surface-2:#213230;
+      --ink:#F1EBDD; --ink-soft:#A6ADA2; --line:#2C3A37;
+      --mango:#F0964B; --mango-soft:#3A2A1A;
+      --teal:#3BB6AE; --teal-soft:#123230;
+      --leaf:#93B65E; --leaf-soft:#20301B;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 26px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#131F1D; --surface:#1B2725; --surface-2:#213230;
+    --ink:#F1EBDD; --ink-soft:#A6ADA2; --line:#2C3A37;
+    --mango:#F0964B; --mango-soft:#3A2A1A;
+    --teal:#3BB6AE; --teal-soft:#123230;
+    --leaf:#93B65E; --leaf-soft:#20301B;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 26px rgba(0,0,0,.28);
+  }
+  :root[data-theme="light"]{
+    --paper:#FBF6EC; --surface:#FFFDF8; --surface-2:#F5EEDF;
+    --ink:#221F1A; --ink-soft:#6B6456; --line:#E7DCC7;
+    --mango:#D8761A; --mango-soft:#F6E4CE;
+    --teal:#0E8C86; --teal-soft:#D5EBE8;
+    --leaf:#5C7C33; --leaf-soft:#E3ECCF;
+    --shadow:0 1px 2px rgba(60,45,20,.06), 0 6px 20px rgba(60,45,20,.06);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    padding:0 18px 72px;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto;}
+
+  /* ---------- Header ---------- */
+  header.hero{
+    padding:44px 0 30px; position:relative;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--mango);
+  }
+  .eyebrow::before{content:""; width:26px; height:2px; background:var(--mango); border-radius:2px;}
+  h1{
+    font-size:clamp(2.1rem,7vw,3.4rem); line-height:1.02; margin:.34em 0 .18em;
+    font-weight:800; letter-spacing:-.02em; text-wrap:balance;
+  }
+  h1 .sun{color:var(--mango);}
+  .tagline{color:var(--ink-soft); font-size:1.05rem; max-width:52ch;}
+
+  /* quick facts */
+  .facts{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:26px;
+  }
+  .fact{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:14px 14px; box-shadow:var(--shadow);
+  }
+  .fact .k{font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:700;}
+  .fact .v{font-size:1.28rem; font-weight:800; margin-top:3px; font-variant-numeric:tabular-nums; line-height:1.1;}
+  .fact .u{font-size:.78rem; color:var(--ink-soft); font-weight:600;}
+  @media(max-width:640px){ .facts{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- Section frame ---------- */
+  section{margin-top:46px;}
+  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:6px;}
+  .sec-num{
+    font-size:.8rem; font-weight:800; color:var(--mango);
+    font-variant-numeric:tabular-nums; letter-spacing:.05em;
+  }
+  h2{font-size:1.5rem; font-weight:800; letter-spacing:-.01em; margin:0;}
+  .sec-sub{color:var(--ink-soft); font-size:.95rem; margin:2px 0 22px;}
+
+  /* ---------- Menu timeline ---------- */
+  .day{margin-bottom:26px;}
+  .day-label{
+    display:flex; align-items:center; gap:10px; margin-bottom:12px;
+  }
+  .day-pill{
+    font-weight:800; font-size:.92rem; color:var(--surface);
+    background:var(--teal); padding:5px 12px; border-radius:999px; letter-spacing:.01em;
+  }
+  .day-date{color:var(--ink-soft); font-weight:600; font-size:.9rem;}
+  .meals{display:flex; flex-direction:column; gap:10px;}
+  .meal{
+    display:grid; grid-template-columns:92px 1fr; gap:14px; align-items:start;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:14px 16px; box-shadow:var(--shadow);
+  }
+  .meal .when{
+    font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--teal); padding-top:2px;
+  }
+  .meal .dish{font-weight:700; font-size:1.02rem; line-height:1.3;}
+  .meal .desc{color:var(--ink-soft); font-size:.9rem; margin-top:3px;}
+  .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:9px;}
+  .chip{
+    font-size:.76rem; font-weight:700; padding:4px 10px; border-radius:999px;
+    background:var(--leaf-soft); color:var(--leaf); border:1px solid transparent;
+    display:inline-flex; align-items:center; gap:5px;
+  }
+  .chip.turno{background:var(--surface-2); color:var(--ink-soft); border-color:var(--line);}
+  .chip.turno::before{content:"👨‍🍳"; font-size:.85em;}
+  .chip.fijo{background:var(--mango-soft); color:var(--mango); border-color:transparent;}
+  .chip.fijo::before{content:"✅"; font-size:.82em;}
+  .chip.libre{background:transparent; color:var(--ink-soft); border:1px dashed var(--line);}
+  @media(max-width:520px){
+    .meal{grid-template-columns:1fr; gap:6px;}
+    .meal .when{padding-top:0;}
+  }
+
+  /* ---------- Market ---------- */
+  .market{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media(max-width:660px){ .market{grid-template-columns:1fr;} }
+  .cat{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:16px 16px 8px; box-shadow:var(--shadow); break-inside:avoid;
+  }
+  .cat h3{
+    margin:0 0 10px; font-size:.82rem; letter-spacing:.09em; text-transform:uppercase;
+    font-weight:800; color:var(--mango); display:flex; align-items:center; gap:8px;
+  }
+  .cat h3 .ic{font-size:1.05rem;}
+  .cat h3 .sub{
+    margin-left:auto; font-size:.82rem; font-weight:800; color:var(--ink);
+    letter-spacing:0; text-transform:none; font-variant-numeric:tabular-nums;
+    background:var(--surface-2); padding:2px 9px; border-radius:999px;
+  }
+  ul.items{list-style:none; margin:0; padding:0;}
+  ul.items li{
+    display:flex; align-items:baseline; gap:10px; padding:7px 0;
+    border-top:1px solid var(--line); font-size:.94rem;
+  }
+  ul.items li:first-child{border-top:none;}
+  .items input[type=checkbox]{
+    appearance:none; -webkit-appearance:none; flex:0 0 auto;
+    width:17px; height:17px; border:1.5px solid var(--line); border-radius:5px;
+    background:var(--surface-2); cursor:pointer; position:relative; top:2px; transition:.12s;
+  }
+  .items input[type=checkbox]:checked{background:var(--leaf); border-color:var(--leaf);}
+  .items input[type=checkbox]:checked::after{
+    content:"✓"; position:absolute; inset:0; color:#fff; font-size:12px; font-weight:900;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .items input[type=checkbox]:checked + .nm{text-decoration:line-through; color:var(--ink-soft);}
+  .items .nm{flex:1;}
+  .items .qty{
+    font-variant-numeric:tabular-nums; font-weight:700; color:var(--ink);
+    white-space:nowrap; font-size:.9rem; text-align:right; min-width:56px;
+  }
+  .items .cost{
+    font-variant-numeric:tabular-nums; font-weight:600; color:var(--ink-soft);
+    white-space:nowrap; font-size:.82rem; text-align:right; min-width:58px;
+  }
+  .items input:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+
+  /* ---------- Logistics ---------- */
+  .logi{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  @media(max-width:660px){ .logi{grid-template-columns:1fr;} }
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:18px; box-shadow:var(--shadow);
+  }
+  .card.accent{border-left:4px solid var(--mango);}
+  .card h4{margin:0 0 7px; font-size:1.02rem; font-weight:800; display:flex; gap:8px; align-items:center;}
+  .card p{margin:0; color:var(--ink-soft); font-size:.93rem;}
+  .card p b{color:var(--ink);}
+  .card ul{margin:6px 0 0; padding-left:18px; color:var(--ink-soft); font-size:.93rem;}
+  .card ul li{margin:4px 0;}
+
+  .callout{
+    margin-top:16px; background:var(--teal-soft); border:1px solid transparent;
+    border-radius:14px; padding:16px 18px; color:var(--ink); font-size:.95rem;
+  }
+  .callout b{color:var(--teal);}
+
+  /* ---------- Budget ---------- */
+  .budget{
+    margin-top:18px; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;
+  }
+  .budget-hd{
+    display:grid; grid-template-columns:1fr auto auto; gap:14px; align-items:center;
+    padding:18px 20px; background:linear-gradient(90deg,var(--mango-soft),transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .budget-hd .lbl{font-weight:800; font-size:1.05rem;}
+  .budget-hd .total{font-size:1.6rem; font-weight:800; color:var(--mango); font-variant-numeric:tabular-nums; line-height:1;}
+  .budget-hd .total small{display:block; font-size:.66rem; color:var(--ink-soft); font-weight:700; letter-spacing:.06em; text-transform:uppercase; text-align:right;}
+  .budget-rows{padding:6px 20px 12px;}
+  .brow{
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    padding:9px 0; border-top:1px solid var(--line); font-size:.94rem;
+  }
+  .brow:first-child{border-top:none;}
+  .brow .bn{color:var(--ink-soft); display:flex; align-items:center; gap:8px;}
+  .brow .bv{font-variant-numeric:tabular-nums; font-weight:700; white-space:nowrap;}
+  .brow.hi .bn{color:var(--ink); font-weight:700;}
+  .brow.hi .bv{color:var(--teal);}
+  .brow.opt{color:var(--ink-soft); font-style:italic;}
+  .budget-note{padding:14px 20px 18px; font-size:.82rem; color:var(--ink-soft); border-top:1px dashed var(--line); background:var(--surface-2);}
+  @media(max-width:520px){
+    .budget-hd{grid-template-columns:1fr auto;}
+    .budget-hd .lbl{grid-column:1 / -1;}
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:52px; padding-top:22px; border-top:1px solid var(--line);
+    color:var(--ink-soft); font-size:.85rem; display:flex; flex-wrap:wrap; gap:8px 18px; justify-content:space-between;
+  }
+  footer b{color:var(--ink);}
+
+  @media print{
+    body{background:#fff; color:#000; padding:0;}
+    .fact,.meal,.cat,.card{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">El Paseo 9 · 18–20 Julio 2026</span>
+    <h1>Plan de <span class="sun">mercado &amp; comidas</span><br>en Capitanejo</h1>
+    <p class="tagline">Casa completa con piscina cerca de San José de Miranda. Aquí está el menú de los tres días, el mercado con cantidades y quién se encarga de cada comida — para llegar cuadrados a la reunión y no improvisar.</p>
+
+    <div class="facts">
+      <div class="fact"><div class="k">Personas</div><div class="v">24</div><div class="u">20 adultos + 4 niños</div></div>
+      <div class="fact"><div class="k">Alojamiento</div><div class="v">$100<span class="u">k</span></div><div class="u">por persona</div></div>
+      <div class="fact"><div class="k">Mercado</div><div class="v">$66<span class="u">k</span></div><div class="u">por persona (est.)</div></div>
+      <div class="fact"><div class="k">Comidas</div><div class="v">7</div><div class="u">2 des · 3 alm · 2 cenas</div></div>
+    </div>
+  </header>
+
+  <!-- 1. MENÚ -->
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>Menú por día</h2></div>
+    <p class="sec-sub">Modelo mixto: el mercado se compra en común y se divide en partes iguales; cada comida tiene 1–2 familias <b>de turno</b> que lideran cocinar, montar la mesa y recoger.</p>
+
+    <!-- Sábado -->
+    <div class="day">
+      <div class="day-label"><span class="day-pill">Sábado</span><span class="day-date">18 de julio · llegada</span></div>
+      <div class="meals">
+        <div class="meal">
+          <div class="when">Almuerzo</div>
+          <div>
+            <div class="dish">En el camino 🚗</div>
+            <div class="desc">Cada familia por su cuenta durante el viaje (varios vienen desde Cúcuta, 5–6 h).</div>
+            <div class="chips"><span class="chip libre">Sin asignar</span></div>
+          </div>
+        </div>
+        <div class="meal">
+          <div class="when">Cena</div>
+          <div>
+            <div class="dish">Espaguetis a la boloñesa</div>
+            <div class="desc">Fácil y rápido para la noche de llegada. Con ensalada verde y pan.</div>
+            <div class="chips"><span class="chip turno">Cendales Contreras</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Domingo -->
+    <div class="day">
+      <div class="day-label"><span class="day-pill">Domingo</span><span class="day-date">19 de julio · día de piscina</span></div>
+      <div class="meals">
+        <div class="meal">
+          <div class="when">Desayuno</div>
+          <div>
+            <div class="dish">Caldo de costilla + huevos pericos</div>
+            <div class="desc">Con arepa, chocolate y café. Levantador para el día grande.</div>
+            <div class="chips"><span class="chip turno">Rojas Sánchez</span></div>
+          </div>
+        </div>
+        <div class="meal">
+          <div class="when">Almuerzo</div>
+          <div>
+            <div class="dish">🔥 Asado / parrillada</div>
+            <div class="desc">Res, pollo y chorizo a la parrilla + papa, yuca, arepa, guacamole y ensalada. El plato estrella del paseo.</div>
+            <div class="chips"><span class="chip turno">Cendales Sánchez</span><span class="chip turno">Cendales Cacua</span></div>
+          </div>
+        </div>
+        <div class="meal">
+          <div class="when">Cena</div>
+          <div>
+            <div class="dish">🍔 Hamburguesas</div>
+            <div class="desc">Ya acordado en el grupo. Carne, queso, tocineta y todas las salsas.</div>
+            <div class="chips"><span class="chip fijo">Familia Peralta Sánchez</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lunes -->
+    <div class="day">
+      <div class="day-label"><span class="day-pill">Lunes</span><span class="day-date">20 de julio · festivo · despedida</span></div>
+      <div class="meals">
+        <div class="meal">
+          <div class="when">Desayuno</div>
+          <div>
+            <div class="dish">Calentado santandereano</div>
+            <div class="desc">Con huevo, arepa y chocolate. Aprovecha lo que sobre del asado.</div>
+            <div class="chips"><span class="chip turno">Gómez Sánchez</span></div>
+          </div>
+        </div>
+        <div class="meal">
+          <div class="when">Almuerzo</div>
+          <div>
+            <div class="dish">Sancocho de gallina de despedida</div>
+            <div class="desc">Olla común antes de arrancar. Cierre a lo grande de los tres días.</div>
+            <div class="chips"><span class="chip turno">Sánchez Yáñez</span><span class="chip turno">apoyo Peralta</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">🏊 <b>Onces / piscina (domingo):</b> fruta picada, mecato para los niños y aguapanela con limón — turno rotativo, sin asignar familia fija.</div>
+  </section>
+
+  <!-- 2. MERCADO -->
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Mercado común</h2></div>
+    <p class="sec-sub">Cantidades calculadas para 24 personas con ~10% de margen. Marca las casillas a medida que van comprando. 👇</p>
+
+    <div class="market">
+
+      <div class="cat">
+        <h3><span class="ic">🥩</span> Proteínas <span class="sub">$627.000</span></h3>
+        <ul class="items">
+          <li><input type="checkbox" id="p1"><label class="nm" for="p1">Res para asar (punta/lomo)</label><span class="qty">6 kg</span><span class="cost">$192.000</span></li>
+          <li><input type="checkbox" id="p2"><label class="nm" for="p2">Pollo para asar (muslo/pechuga)</label><span class="qty">4 kg</span><span class="cost">$44.000</span></li>
+          <li><input type="checkbox" id="p3"><label class="nm" for="p3">Chorizo / butifarra</label><span class="qty">30 u</span><span class="cost">$60.000</span></li>
+          <li><input type="checkbox" id="p4"><label class="nm" for="p4">Carne molida (boloñesa + hamburguesa)</label><span class="qty">5 kg</span><span class="cost">$100.000</span></li>
+          <li><input type="checkbox" id="p5"><label class="nm" for="p5">Gallina/pollo para sancocho</label><span class="qty">6 kg</span><span class="cost">$72.000</span></li>
+          <li><input type="checkbox" id="p6"><label class="nm" for="p6">Costilla de res (caldo + sancocho)</label><span class="qty">4 kg</span><span class="cost">$72.000</span></li>
+          <li><input type="checkbox" id="p7"><label class="nm" for="p7">Huevos</label><span class="qty">60 u</span><span class="cost">$40.000</span></li>
+          <li><input type="checkbox" id="p8"><label class="nm" for="p8">Tocineta</label><span class="qty">500 g</span><span class="cost">$9.000</span></li>
+          <li><input type="checkbox" id="p9"><label class="nm" for="p9">Queso en lonchas (hamburguesa)</label><span class="qty">30 u</span><span class="cost">$22.000</span></li>
+          <li><input type="checkbox" id="p10"><label class="nm" for="p10">Queso campesino</label><span class="qty">1 kg</span><span class="cost">$16.000</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🌾</span> Granos &amp; abarrotes <span class="sub">$319.000</span></h3>
+        <ul class="items">
+          <li><input type="checkbox" id="g1"><label class="nm" for="g1">Arroz</label><span class="qty">5 kg</span><span class="cost">$20.000</span></li>
+          <li><input type="checkbox" id="g2"><label class="nm" for="g2">Espagueti</label><span class="qty">3 kg</span><span class="cost">$18.000</span></li>
+          <li><input type="checkbox" id="g3"><label class="nm" for="g3">Papa</label><span class="qty">15 kg</span><span class="cost">$42.000</span></li>
+          <li><input type="checkbox" id="g4"><label class="nm" for="g4">Yuca</label><span class="qty">6 kg</span><span class="cost">$18.000</span></li>
+          <li><input type="checkbox" id="g5"><label class="nm" for="g5">Plátano (verde + maduro)</label><span class="qty">20 u</span><span class="cost">$30.000</span></li>
+          <li><input type="checkbox" id="g6"><label class="nm" for="g6">Mazorca</label><span class="qty">12 u</span><span class="cost">$24.000</span></li>
+          <li><input type="checkbox" id="g7"><label class="nm" for="g7">Arepas (o harina de maíz 2 kg)</label><span class="qty">60 u</span><span class="cost">$30.000</span></li>
+          <li><input type="checkbox" id="g8"><label class="nm" for="g8">Pan + pan tajado</label><span class="qty">60 u+2</span><span class="cost">$42.000</span></li>
+          <li><input type="checkbox" id="g9"><label class="nm" for="g9">Aceite</label><span class="qty">2 L</span><span class="cost">$24.000</span></li>
+          <li><input type="checkbox" id="g10"><label class="nm" for="g10">Salsa/pasta de tomate</label><span class="qty">4 latas</span><span class="cost">$16.000</span></li>
+          <li><input type="checkbox" id="g11"><label class="nm" for="g11">Sal, comino, color, ajo, caldo en cubo</label><span class="qty">varios</span><span class="cost">$25.000</span></li>
+          <li><input type="checkbox" id="g12"><label class="nm" for="g12">Mayonesa, mostaza, salsa de tomate</label><span class="qty">varios</span><span class="cost">$30.000</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🥗</span> Verduras &amp; ensalada <span class="sub">$137.000</span></h3>
+        <ul class="items">
+          <li><input type="checkbox" id="v1"><label class="nm" for="v1">Tomate</label><span class="qty">5 kg</span><span class="cost">$20.000</span></li>
+          <li><input type="checkbox" id="v2"><label class="nm" for="v2">Cebolla cabezona</label><span class="qty">4 kg</span><span class="cost">$14.000</span></li>
+          <li><input type="checkbox" id="v3"><label class="nm" for="v3">Cebolla larga</label><span class="qty">2 atados</span><span class="cost">$8.000</span></li>
+          <li><input type="checkbox" id="v4"><label class="nm" for="v4">Lechuga</label><span class="qty">6 u</span><span class="cost">$18.000</span></li>
+          <li><input type="checkbox" id="v5"><label class="nm" for="v5">Cilantro</label><span class="qty">4 atados</span><span class="cost">$8.000</span></li>
+          <li><input type="checkbox" id="v6"><label class="nm" for="v6">Aguacate</label><span class="qty">12 u</span><span class="cost">$36.000</span></li>
+          <li><input type="checkbox" id="v7"><label class="nm" for="v7">Limón</label><span class="qty">3 kg</span><span class="cost">$12.000</span></li>
+          <li><input type="checkbox" id="v8"><label class="nm" for="v8">Zanahoria</label><span class="qty">2 kg</span><span class="cost">$6.000</span></li>
+          <li><input type="checkbox" id="v9"><label class="nm" for="v9">Pimentón</label><span class="qty">1 kg</span><span class="cost">$5.000</span></li>
+          <li><input type="checkbox" id="v10"><label class="nm" for="v10">Papa criolla</label><span class="qty">2 kg</span><span class="cost">$10.000</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">☕</span> Desayuno &amp; lácteos <span class="sub">$119.000</span></h3>
+        <ul class="items">
+          <li><input type="checkbox" id="d1"><label class="nm" for="d1">Chocolate (pastillas)</label><span class="qty">2 cajas</span><span class="cost">$24.000</span></li>
+          <li><input type="checkbox" id="d2"><label class="nm" for="d2">Café</label><span class="qty">1 kg</span><span class="cost">$28.000</span></li>
+          <li><input type="checkbox" id="d3"><label class="nm" for="d3">Panela</label><span class="qty">2 kg</span><span class="cost">$6.000</span></li>
+          <li><input type="checkbox" id="d4"><label class="nm" for="d4">Leche</label><span class="qty">6 L</span><span class="cost">$24.000</span></li>
+          <li><input type="checkbox" id="d5"><label class="nm" for="d5">Mantequilla</label><span class="qty">500 g</span><span class="cost">$10.000</span></li>
+          <li><input type="checkbox" id="d6"><label class="nm" for="d6">Azúcar</label><span class="qty">3 kg</span><span class="cost">$15.000</span></li>
+          <li><input type="checkbox" id="d7"><label class="nm" for="d7">Avena / chocolate niños</label><span class="qty">varios</span><span class="cost">$12.000</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🍉</span> Frutas, onces &amp; bebidas <span class="sub">$200.000</span></h3>
+        <ul class="items">
+          <li><input type="checkbox" id="b1"><label class="nm" for="b1">Sandía / melón</label><span class="qty">2 u</span><span class="cost">$24.000</span></li>
+          <li><input type="checkbox" id="b2"><label class="nm" for="b2">Fruta para jugos (naranja/mango/mora)</label><span class="qty">varios</span><span class="cost">$25.000</span></li>
+          <li><input type="checkbox" id="b3"><label class="nm" for="b3">Galletas / mecato niños</label><span class="qty">varios</span><span class="cost">$30.000</span></li>
+          <li><input type="checkbox" id="b4"><label class="nm" for="b4">Agua botellón 20 L</label><span class="qty">2 u</span><span class="cost">$20.000</span></li>
+          <li><input type="checkbox" id="b5"><label class="nm" for="b5">Gaseosa 1.5 L</label><span class="qty">12 u</span><span class="cost">$60.000</span></li>
+          <li><input type="checkbox" id="b6"><label class="nm" for="b6">Jugos / hidratantes</label><span class="qty">varios</span><span class="cost">$25.000</span></li>
+          <li><input type="checkbox" id="b7"><label class="nm" for="b7">Hielo (bolsas)</label><span class="qty">4 u</span><span class="cost">$16.000</span></li>
+          <li><input type="checkbox" id="b8"><label class="nm" for="b8">Cerveza / ron (adultos, opcional)</label><span class="qty">opcional</span><span class="cost">+$120k</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🧺</span> Desechables &amp; varios <span class="sub">$180.000</span></h3>
+        <ul class="items">
+          <li><input type="checkbox" id="x1"><label class="nm" for="x1">Platos, vasos y cubiertos (respaldo)</label><span class="qty">varios</span><span class="cost">$40.000</span></li>
+          <li><input type="checkbox" id="x2"><label class="nm" for="x2">Servilletas</label><span class="qty">varios</span><span class="cost">$8.000</span></li>
+          <li><input type="checkbox" id="x3"><label class="nm" for="x3">Papel higiénico</label><span class="qty">varios</span><span class="cost">$20.000</span></li>
+          <li><input type="checkbox" id="x4"><label class="nm" for="x4">Bolsas de basura</label><span class="qty">varios</span><span class="cost">$10.000</span></li>
+          <li><input type="checkbox" id="x5"><label class="nm" for="x5">Papel aluminio / vinipel</label><span class="qty">varios</span><span class="cost">$15.000</span></li>
+          <li><input type="checkbox" id="x6"><label class="nm" for="x6">Carbón + encendedor (asado)</label><span class="qty">2 bultos</span><span class="cost">$40.000</span></li>
+          <li><input type="checkbox" id="x7"><label class="nm" for="x7">Jabón loza + esponja</label><span class="qty">varios</span><span class="cost">$12.000</span></li>
+          <li><input type="checkbox" id="x8"><label class="nm" for="x8">Repelente + bloqueador</label><span class="qty">varios</span><span class="cost">$35.000</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="budget">
+      <div class="budget-hd">
+        <span class="lbl">💵 Presupuesto del mercado</span>
+        <span class="total">$1.582.000<small>total estimado</small></span>
+        <span class="total">$66.000<small>por persona</small></span>
+      </div>
+      <div class="budget-rows">
+        <div class="brow"><span class="bn">🥩 Proteínas</span><span class="bv">$627.000</span></div>
+        <div class="brow"><span class="bn">🌾 Granos &amp; abarrotes</span><span class="bv">$319.000</span></div>
+        <div class="brow"><span class="bn">🍉 Frutas, onces &amp; bebidas</span><span class="bv">$200.000</span></div>
+        <div class="brow"><span class="bn">🧺 Desechables &amp; varios</span><span class="bv">$180.000</span></div>
+        <div class="brow"><span class="bn">🥗 Verduras &amp; ensalada</span><span class="bv">$137.000</span></div>
+        <div class="brow"><span class="bn">☕ Desayuno &amp; lácteos</span><span class="bv">$119.000</span></div>
+        <div class="brow hi"><span class="bn">Total mercado (sin licor)</span><span class="bv">$1.582.000</span></div>
+        <div class="brow opt"><span class="bn">+ Licor (cerveza/ron, opcional)</span><span class="bv">+$120.000</span></div>
+      </div>
+      <div class="budget-note">
+        📊 Estimado según precios de la <b>canasta colombiana 2026</b> (DANE/SIPSA — carne de res ≈ $31.774/kg). Los valores <b>varían por ciudad y almacén</b> y la inflación de alimentos ronda el 7% anual. Comprando el grueso en <b>Cúcuta o en central mayorista</b> (tipo Corabastos/Cenabastos) el total baja notablemente. Aparte va el <b>alojamiento: $100.000/persona</b>.
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LOGÍSTICA -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Cómo atacarlo</h2></div>
+    <p class="sec-sub">Cinco acuerdos para que el mercado y la cocina fluyan sin enredos.</p>
+
+    <div class="logi">
+      <div class="card accent">
+        <h4>💰 Dos cajas separadas</h4>
+        <p>La <b>estadía</b> la maneja Alexis (llave <b>1001301376</b> · Paula L. Cacua) — tope de pago <b>9 de julio</b>. Para el <b>mercado</b> nombrar un tesorero aparte y dividir el total entre 24.</p>
+      </div>
+      <div class="card">
+        <h4>🛒 Dónde comprar</h4>
+        <p>El grueso no perecedero, más barato en <b>Cúcuta</b> / ciudad de origen. Carne, pan, hielo y verdura fresca, en <b>Capitanejo o Málaga</b> ya en el camino.</p>
+      </div>
+      <div class="card">
+        <h4>🎒 Qué llevar sí o sí</h4>
+        <ul>
+          <li>Olla grande / paila para el sancocho</li>
+          <li>Parrilla o asador para el domingo</li>
+          <li>Neveras de icopor + hielo para las carnes (viaje largo)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>👨‍🍳 Familia de turno</h4>
+        <p>Lidera <b>cocinar, montar la mesa y recoger/lavar</b> de esa comida. Los ingredientes salen del mercado común, así nadie carga con todo.</p>
+      </div>
+    </div>
+
+    <div class="callout">📞 <b>Antes de viajar:</b> confirmar con la anfitriona si la cocina tiene <b>menaje y ollas</b> (quedó como duda en el grupo) y llevar este plan a la <b>reunión virtual</b> para cerrar familias y el número final de personas.</div>
+  </section>
+
+  <footer>
+    <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
+    <span>Cantidades para <b>24 personas</b> · ajustar si confirma el tío Miro</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
