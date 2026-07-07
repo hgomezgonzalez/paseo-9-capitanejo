@@ -56,21 +56,31 @@
 
   /* ---------- Fondo temático animado ---------- */
   .bg-fx{position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;}
-  .bg-fx .glow{position:absolute; border-radius:50%; filter:blur(8px);}
+  .bg-fx .glow{position:absolute; border-radius:50%; filter:blur(6px);}
   .bg-fx .glow.sun{
-    top:-14%; right:-10%; width:56vw; height:56vw;
-    background:radial-gradient(circle, rgba(216,118,26,.16), transparent 68%);
+    top:-8%; right:-6%; width:58vw; height:58vw;
+    background:radial-gradient(circle, rgba(224,120,20,.40), transparent 66%);
     animation:glowPulse 15s ease-in-out infinite alternate;
   }
   .bg-fx .glow.pool{
-    bottom:-16%; left:-12%; width:60vw; height:60vw;
-    background:radial-gradient(circle, rgba(14,140,134,.15), transparent 68%);
+    bottom:-10%; left:-8%; width:62vw; height:62vw;
+    background:radial-gradient(circle, rgba(14,150,144,.36), transparent 66%);
     animation:glowPulse 19s ease-in-out infinite alternate-reverse;
   }
   .bg-fx .glow.leaf{
-    top:35%; left:45%; width:42vw; height:42vw;
-    background:radial-gradient(circle, rgba(92,124,51,.10), transparent 70%);
+    top:28%; left:36%; width:48vw; height:48vw;
+    background:radial-gradient(circle, rgba(96,132,52,.26), transparent 68%);
     animation:glowPulse 23s ease-in-out infinite alternate;
+  }
+  .bg-fx .glow.sun2{
+    bottom:4%; right:6%; width:42vw; height:42vw;
+    background:radial-gradient(circle, rgba(224,120,20,.24), transparent 68%);
+    animation:glowPulse 21s ease-in-out infinite alternate-reverse;
+  }
+  .bg-fx .glow.pool2{
+    top:6%; left:8%; width:40vw; height:40vw;
+    background:radial-gradient(circle, rgba(14,150,144,.24), transparent 68%);
+    animation:glowPulse 17s ease-in-out infinite alternate;
   }
   @keyframes glowPulse{from{transform:scale(1) translateY(0); opacity:.7;} to{transform:scale(1.16) translateY(-3%); opacity:1;}}
   @media (prefers-reduced-motion: reduce){
@@ -441,6 +451,8 @@
   <div class="glow sun"></div>
   <div class="glow pool"></div>
   <div class="glow leaf"></div>
+  <div class="glow sun2"></div>
+  <div class="glow pool2"></div>
 </div>
 <div class="wrap">
 
@@ -518,7 +530,7 @@
       </div>
       <div class="room">
         <div class="rhd"><span class="rnum">3</span><span class="rname">Cendales Cacua</span><span class="rpers">👥 4</span></div>
-        <div class="rbody"><div class="rbeds">🛏️ <b>2 camas</b> · queen + matrimonial</div><span class="who">Sandro Alexis, Paula, su hija Alanna y Daniela</span><div class="beds">Alanna (1 año) duerme con los papás</div></div>
+        <div class="rbody"><div class="rbeds">🛏️ <b>1 cama</b> · queen</div><span class="who">Sandro Alexis, Paula, su hija Alanna y Daniela</span><div class="beds">Alanna (1 año) duerme con los papás</div></div>
       </div>
       <div class="room">
         <div class="rhd"><span class="rnum">4</span><span class="rname">Rojas Sánchez</span><span class="rpers">👥 2</span></div>
@@ -530,7 +542,7 @@
       </div>
       <div class="room big">
         <div class="rhd"><span class="rnum">6</span><span class="rname">Peralta + Hugo &amp; Rocío</span><span class="rtag">la más grande</span><span class="rpers">👥 6</span></div>
-        <div class="rbody"><div class="rbeds">🛏️ <b>3 camas</b> · 2 matrimoniales + 1 individual</div><span class="who">Oliver, mireya, Hans, Arantza + Hugo &amp; Rocío</span><div class="beds">La familia Peralta se queda con Hugo y Rocío</div></div>
+        <div class="rbody"><div class="rbeds">🛏️ <b>4 camas</b> · 3 matrimoniales + 1 individual</div><span class="who">Oliver, mireya, Hans, Arantza + Hugo &amp; Rocío</span><div class="beds">La familia Peralta se queda con Hugo y Rocío</div></div>
       </div>
       <div class="room colch">
         <div class="rhd"><span class="rnum">🛋️</span><span class="rname">Colchonetas ×2</span><span class="rpers">👥 2</span></div>
@@ -830,7 +842,7 @@
   <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
     <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>6 de julio de 2026, 11:44 p.m.</b> (hora Colombia)</span>
+    <span class="ver">🕒 Versión desplegada: <b>6 de julio de 2026, 11:53 p.m.</b> (hora Colombia)</span>
   </footer>
 
 </div>
