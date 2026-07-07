@@ -177,6 +177,12 @@
   }
   .items input:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
 
+  /* ---------- Market-by-meal ---------- */
+  .cat .meal-fam{margin:-2px 0 10px; display:flex; flex-wrap:wrap; gap:6px;}
+  .cat.transversal{border-left:4px solid var(--teal);}
+  .cat.transversal h3{color:var(--teal);}
+  .cat.transversal h3 .sub{color:var(--ink);}
+
   /* ---------- Logistics ---------- */
   .logi{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
   @media(max-width:660px){ .logi{grid-template-columns:1fr;} }
@@ -373,8 +379,8 @@
 
   <!-- 2. MERCADO -->
   <section>
-    <div class="sec-head"><span class="sec-num">02</span><h2>Mercado común</h2></div>
-    <p class="sec-sub">Cantidades calculadas para 24 personas con ~10% de margen. Marca las casillas a medida que van comprando. 👇</p>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Lista de compras (total)</h2></div>
+    <p class="sec-sub">Todo lo que hay que comprar para 24 personas (~10% de margen), agrupado por categoría para hacer el mercado. Marca las casillas a medida que van comprando. Más abajo, en <b>“Mercado por comida”</b>, verás cómo se reparte en cada plato. 👇</p>
 
     <div class="market">
 
@@ -493,9 +499,120 @@
     </div>
   </section>
 
-  <!-- 3. LOGÍSTICA -->
+  <!-- 3. MERCADO POR COMIDA -->
   <section>
-    <div class="sec-head"><span class="sec-num">03</span><h2>Cómo atacarlo</h2></div>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Mercado por comida</h2></div>
+    <p class="sec-sub">El mismo mercado, pero repartido en cada plato — así la familia de turno compra/alista <b>solo lo suyo</b> y no se compra de más. La suma da el mismo total (~$1.58M). Lo <b>transversal</b> (bebidas, café, aseo) se usa todo el fin de semana.</p>
+
+    <div class="market">
+
+      <div class="cat">
+        <h3><span class="ic">🍝</span> Cena sáb · Espaguetis <span class="sub">$107.000</span></h3>
+        <div class="meal-fam"><span class="chip turno">Cendales Contreras</span></div>
+        <ul class="items">
+          <li><span class="nm">Espagueti</span><span class="qty">3 kg</span></li>
+          <li><span class="nm">Carne molida</span><span class="qty">2,5 kg</span></li>
+          <li><span class="nm">Salsa / pasta de tomate</span><span class="qty">4 latas</span></li>
+          <li><span class="nm">Cebolla, tomate, pimentón, ajo</span><span class="qty">2 kg</span></li>
+          <li><span class="nm">Pan tajado (al ajo)</span><span class="qty">1</span></li>
+          <li><span class="nm">Queso para rallar</span><span class="qty">300 g</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🍲</span> Desayuno dom · Caldo <span class="sub">$125.000</span></h3>
+        <div class="meal-fam"><span class="chip turno">Rojas Sánchez</span></div>
+        <ul class="items">
+          <li><span class="nm">Costilla de res</span><span class="qty">2,5 kg</span></li>
+          <li><span class="nm">Huevos (pericos)</span><span class="qty">30 u</span></li>
+          <li><span class="nm">Arepas</span><span class="qty">24 u</span></li>
+          <li><span class="nm">Papa + papa criolla</span><span class="qty">4 kg</span></li>
+          <li><span class="nm">Cebolla larga + cilantro</span><span class="qty">1+1</span></li>
+          <li><span class="nm">Chocolate + leche</span><span class="qty">1 caja+3 L</span></li>
+          <li><span class="nm">Queso campesino + mantequilla</span><span class="qty">350 g</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🔥</span> Almuerzo dom · Asado <span class="sub">$430.000</span></h3>
+        <div class="meal-fam"><span class="chip turno">Cendales Sánchez</span><span class="chip turno">Cendales Cacua</span></div>
+        <ul class="items">
+          <li><span class="nm">Res para asar</span><span class="qty">6 kg</span></li>
+          <li><span class="nm">Pollo</span><span class="qty">4 kg</span></li>
+          <li><span class="nm">Chorizo / butifarra</span><span class="qty">30 u</span></li>
+          <li><span class="nm">Papa</span><span class="qty">6 kg</span></li>
+          <li><span class="nm">Yuca</span><span class="qty">3 kg</span></li>
+          <li><span class="nm">Arepas</span><span class="qty">12 u</span></li>
+          <li><span class="nm">Aguacate (guacamole)</span><span class="qty">12 u</span></li>
+          <li><span class="nm">Ensalada (tomate/cebolla/lechuga)</span><span class="qty">4 kg</span></li>
+          <li><span class="nm">Arroz</span><span class="qty">2 kg</span></li>
+          <li><span class="nm">Carbón + encendedor</span><span class="qty">2 bultos</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🍔</span> Cena dom · Hamburguesas <span class="sub">$155.000</span></h3>
+        <div class="meal-fam"><span class="chip fijo">Peralta Sánchez</span></div>
+        <ul class="items">
+          <li><span class="nm">Carne molida (30 medallones)</span><span class="qty">2,5 kg</span></li>
+          <li><span class="nm">Pan de hamburguesa</span><span class="qty">30 u</span></li>
+          <li><span class="nm">Queso en lonchas</span><span class="qty">30 u</span></li>
+          <li><span class="nm">Tocineta</span><span class="qty">500 g</span></li>
+          <li><span class="nm">Lechuga, tomate, cebolla</span><span class="qty">3 kg</span></li>
+          <li><span class="nm">Mayonesa, mostaza, salsa</span><span class="qty">surtido</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🍳</span> Desayuno lun · Calentado <span class="sub">$70.000</span></h3>
+        <div class="meal-fam"><span class="chip turno">Gómez Sánchez</span></div>
+        <ul class="items">
+          <li><span class="nm">Arroz (o sobras del asado)</span><span class="qty">1,5 kg</span></li>
+          <li><span class="nm">Huevos</span><span class="qty">30 u</span></li>
+          <li><span class="nm">Arepas</span><span class="qty">24 u</span></li>
+          <li><span class="nm">Chocolate + leche</span><span class="qty">1 caja+3 L</span></li>
+          <li><span class="nm">Queso + mantequilla</span><span class="qty">300 g</span></li>
+        </ul>
+      </div>
+
+      <div class="cat">
+        <h3><span class="ic">🥘</span> Almuerzo lun · Sancocho <span class="sub">$191.000</span></h3>
+        <div class="meal-fam"><span class="chip turno">Sánchez Yáñez</span><span class="chip turno">apoyo Peralta</span></div>
+        <ul class="items">
+          <li><span class="nm">Gallina / pollo</span><span class="qty">6 kg</span></li>
+          <li><span class="nm">Costilla de res</span><span class="qty">1,5 kg</span></li>
+          <li><span class="nm">Papa</span><span class="qty">6 kg</span></li>
+          <li><span class="nm">Yuca</span><span class="qty">3 kg</span></li>
+          <li><span class="nm">Plátano verde</span><span class="qty">12 u</span></li>
+          <li><span class="nm">Mazorca</span><span class="qty">12 u</span></li>
+          <li><span class="nm">Arroz</span><span class="qty">1,5 kg</span></li>
+          <li><span class="nm">Cebolla larga, cilantro, verduras</span><span class="qty">surtido</span></li>
+        </ul>
+      </div>
+
+      <div class="cat transversal">
+        <h3><span class="ic">🛒</span> Transversal · todo el finde <span class="sub">$500.000</span></h3>
+        <div class="meal-fam"><span class="chip">🔄 Turno rotativo</span></div>
+        <ul class="items">
+          <li><span class="nm">Café, panela, azúcar</span><span class="qty">1+2+3 kg</span></li>
+          <li><span class="nm">Aceite + condimentos (sal, comino, color, caldo)</span><span class="qty">surtido</span></li>
+          <li><span class="nm">Agua botellón + gaseosa + jugos + hielo</span><span class="qty">2/12/4</span></li>
+          <li><span class="nm">Frutas, sandía, mecato y galletas niños</span><span class="qty">varios</span></li>
+          <li><span class="nm">Plátano maduro (tajadas)</span><span class="qty">8 u</span></li>
+          <li><span class="nm">Desechables (platos, vasos, cubiertos, servilletas)</span><span class="qty">surtido</span></li>
+          <li><span class="nm">Aseo (papel, bolsas, jabón loza, aluminio)</span><span class="qty">surtido</span></li>
+          <li><span class="nm">Repelente + bloqueador</span><span class="qty">surtido</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="callout">💡 <b>Regla anti-exceso:</b> las cantidades ya están calculadas para 24 con ~10% de margen. Si una comida se cruza con otra (p. ej. sobra carne del asado), esa familia <b>aprovecha las sobras</b> en el calentado del lunes en vez de comprar más.</div>
+  </section>
+
+  <!-- 4. LOGÍSTICA -->
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Cómo atacarlo</h2></div>
     <p class="sec-sub">Cinco acuerdos para que el mercado y la cocina fluyan sin enredos.</p>
 
     <div class="logi">
