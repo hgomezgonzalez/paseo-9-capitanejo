@@ -517,25 +517,29 @@
   .plan-top{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin-bottom:16px;}
   .plan-sticky{background:var(--surface); padding:12px; border-radius:16px; box-shadow:var(--shadow); border:1px solid var(--line);}
 
-  /* Barra de resumen global (siempre visible) */
+  /* Barra de resumen global (siempre visible, resaltada) */
   .live-bar{
     position:sticky; top:0; z-index:55; cursor:pointer;
-    display:flex; align-items:center; gap:12px; margin:0 -18px 16px; padding:11px 18px;
-    background:linear-gradient(90deg, var(--mango-soft), var(--surface));
-    border-bottom:1px solid var(--line); box-shadow:0 4px 14px rgba(60,45,20,.10);
-    -webkit-backdrop-filter:saturate(1.2); backdrop-filter:saturate(1.2);
+    display:flex; align-items:center; gap:12px; margin:0 -18px 18px; padding:12px 18px;
+    background:linear-gradient(100deg, #e0781a 0%, #c9640f 55%, #b85a0c 100%);
+    color:#fff; box-shadow:0 6px 20px rgba(184,90,12,.45);
   }
-  .live-bar .lb-ic{font-size:1.4rem; flex:0 0 auto;}
+  .live-bar .lb-ic{font-size:1.55rem; flex:0 0 auto; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25));}
   .live-bar .lb-txt{display:flex; flex-direction:column; line-height:1.05;}
-  .live-bar .lb-lbl{font-size:.64rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft);}
-  .live-bar .lb-txt b{font-size:1.28rem; font-weight:800; color:var(--mango); font-variant-numeric:tabular-nums;}
-  .live-bar .lb-sub{font-size:.78rem; color:var(--ink-soft); font-weight:600; font-variant-numeric:tabular-nums;}
-  .live-bar .lb-go{margin-left:auto; flex:0 0 auto; font-weight:800; font-size:.85rem; color:#fff; background:var(--mango); padding:6px 13px; border-radius:999px; box-shadow:0 3px 9px rgba(216,118,26,.35);}
-  .live-bar:hover .lb-go{filter:brightness(1.05);}
-  .live-bar:focus-visible{outline:3px solid var(--mango); outline-offset:-3px;}
-  @media(max-width:520px){ .live-bar .lb-sub{display:none;} }
-  @keyframes flashPulse{0%{transform:scale(1);}38%{transform:scale(1.18); color:var(--mango);}100%{transform:scale(1);}}
-  .flash{display:inline-block; animation:flashPulse .55s ease;}
+  .live-bar .lb-lbl{font-size:.66rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:rgba(255,255,255,.85);}
+  .live-bar .lb-txt b{font-size:1.5rem; font-weight:800; color:#fff; font-variant-numeric:tabular-nums; text-shadow:0 1px 3px rgba(0,0,0,.2);}
+  .live-bar .lb-sub{font-size:.8rem; color:rgba(255,255,255,.92); font-weight:600; font-variant-numeric:tabular-nums;}
+  .live-bar .lb-go{margin-left:auto; flex:0 0 auto; font-weight:800; font-size:.85rem; color:#c9640f; background:#fff; padding:7px 15px; border-radius:999px; box-shadow:0 3px 9px rgba(0,0,0,.2); white-space:nowrap;}
+  .live-bar:hover{filter:brightness(1.04);}
+  .live-bar:focus-visible{outline:3px solid #fff; outline-offset:-3px;}
+  @media(max-width:520px){
+    .live-bar{gap:10px; padding:11px 16px;}
+    .live-bar .lb-sub{display:none;}
+    .live-bar .lb-txt b{font-size:1.35rem;}
+    .live-bar .lb-go{padding:7px 13px;}
+  }
+  @keyframes flashPulse{0%{transform:scale(1);}38%{transform:scale(1.22);}100%{transform:scale(1);}}
+  .flash{display:inline-block; animation:flashPulse .5s ease;}
   @media (prefers-reduced-motion: reduce){ .flash{animation:none;} }
   .plan-live{
     background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
@@ -679,7 +683,7 @@
     <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
     <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 10:30 a.m.</b> (hora Colombia)</span>
+    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 10:49 a.m.</b> (hora Colombia)</span>
   </footer>
   </div>
 
