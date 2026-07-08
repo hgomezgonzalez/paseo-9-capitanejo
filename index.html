@@ -726,7 +726,7 @@
     <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
     <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 12:13 p.m.</b> (hora Colombia)</span>
+    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 12:21 p.m.</b> (hora Colombia)</span>
   </footer>
   </div>
 
@@ -1011,7 +1011,7 @@
 
   // Biblioteca de platos: id -> {emoji, nombre, costo, fam, nota, ing:[[item,cant,costo]]}
   var D = {
-    arrozpollo:  {e:"🍚", n:"Arroz con pollo", c:140000, ing:[["Pollo","5 kg",55000],["Arroz","5 kg",20000],["Verduras (arveja/zanahoria/pimentón)","surtido",25000],["Cebolla, tomate, ajo","2 kg",15000],["Caldo y condimentos","surtido",10000],["Papa / aguacate","surtido",15000]]},
+    arrozmixto:  {e:"🍚", n:"Arroz mixto", c:185000, ing:[["Arroz","5 kg",20000],["Pollo","3 kg",33000],["Cerdo","2 kg",36000],["Camarones","1 kg",30000],["Chorizo","12 u",24000],["Verduras (arveja/zanahoria/pimentón)","surtido",22000],["Cebolla, tomate, ajo, aliños","surtido",12000],["Aceite / condimentos","surtido",8000]]},
     sancocho:    {e:"🥘", n:"Sancocho de gallina", c:191000, ing:[["Gallina / pollo","6 kg",72000],["Costilla de res","1,5 kg",27000],["Papa","6 kg",17000],["Yuca","3 kg",9000],["Plátano verde","12 u",18000],["Mazorca","12 u",24000],["Arroz","1,5 kg",6000],["Cebolla larga, cilantro, verduras","surtido",18000]]},
     asado:       {e:"🔥", n:"Asado / parrillada", c:430000, ing:[["Res para asar","6 kg",192000],["Pollo","4 kg",44000],["Chorizo / butifarra","30 u",60000],["Papa","6 kg",17000],["Yuca","3 kg",9000],["Arepas","12 u",6000],["Aguacate (guacamole)","12 u",36000],["Ensalada (tomate/cebolla/lechuga)","4 kg",18000],["Arroz","2 kg",8000],["Carbón + encendedor","2 bultos",40000]]},
     espaguetis:  {e:"🍝", n:"Espaguetis a la boloñesa", c:107000, ing:[["Espagueti","3 kg",18000],["Carne molida","2,5 kg",50000],["Salsa / pasta de tomate","4 latas",16000],["Cebolla, tomate, pimentón","2 kg",12000],["Pan tajado (al ajo)","1",6000],["Queso para rallar","300 g",5000]]},
@@ -1032,15 +1032,15 @@
 
   // Comidas del fin de semana (slots) con sus opciones
   var SLOTS = [
-    {id:"s1", dia:"Sábado 18", mom:"Almuerzo (llegada)", tag:"llegada", opts:["arrozpollo","sancocho","asado","espaguetis","arepasrell","hambcombo"]},
+    {id:"s1", dia:"Sábado 18", mom:"Almuerzo (llegada)", tag:"llegada", opts:["arrozmixto","sancocho","asado","espaguetis","arepasrell","hambcombo"]},
     {id:"s2", dia:"Sábado 18", mom:"Cena",               opts:["espaguetis","pizza","perros","picada","arepasrell","hambcombo"]},
     {id:"s3", dia:"Domingo 19", mom:"Desayuno",          opts:["caldo","huevosarepa","tamales","changua"]},
     {id:"s4", dia:"Domingo 19", mom:"Almuerzo",          opts:["cachamas","asado","sancocho"]},
     {id:"s5", dia:"Domingo 19", mom:"Cena",              opts:["hamburguesas","hambcombo","perros","pizza","arepasrell"]},
     {id:"s6", dia:"Lunes 20", mom:"Desayuno",            opts:["calentado","caldo","huevosarepa"]},
-    {id:"s7", dia:"Lunes 20", mom:"Almuerzo (despedida)", opts:["sancocho","arrozpollo","pescadofrito","arepasrell"]}
+    {id:"s7", dia:"Lunes 20", mom:"Almuerzo (despedida)", opts:["sancocho","arrozmixto","pescadofrito","arepasrell"]}
   ];
-  var DEFAULTS = {s1:"arrozpollo", s2:"espaguetis", s3:"caldo", s4:"cachamas", s5:"hamburguesas", s6:"calentado", s7:"sancocho"};
+  var DEFAULTS = {s1:"arrozmixto", s2:"espaguetis", s3:"caldo", s4:"cachamas", s5:"hamburguesas", s6:"calentado", s7:"sancocho"};
 
   var FAMILIES = ["Peralta Sánchez","Gómez Sánchez","Cendales Sánchez","Cendales Cacua","Cendales Contreras","Sánchez Yáñez","Daniela","Hans","Arantza"];
 
