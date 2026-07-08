@@ -515,7 +515,25 @@
   }
   .how-note b{color:var(--sec);}
   .plan-top{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin-bottom:16px;}
-  .plan-sticky{position:sticky; top:8px; z-index:30; background:var(--paper); padding:10px; border-radius:16px; box-shadow:0 6px 18px rgba(60,45,20,.12); border:1px solid var(--line);}
+  .plan-sticky{background:var(--surface); padding:12px; border-radius:16px; box-shadow:var(--shadow); border:1px solid var(--line);}
+
+  /* Barra de resumen global (siempre visible) */
+  .live-bar{
+    position:sticky; top:0; z-index:55; cursor:pointer;
+    display:flex; align-items:center; gap:12px; margin:0 -18px 16px; padding:11px 18px;
+    background:linear-gradient(90deg, var(--mango-soft), var(--surface));
+    border-bottom:1px solid var(--line); box-shadow:0 4px 14px rgba(60,45,20,.10);
+    -webkit-backdrop-filter:saturate(1.2); backdrop-filter:saturate(1.2);
+  }
+  .live-bar .lb-ic{font-size:1.4rem; flex:0 0 auto;}
+  .live-bar .lb-txt{display:flex; flex-direction:column; line-height:1.05;}
+  .live-bar .lb-lbl{font-size:.64rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft);}
+  .live-bar .lb-txt b{font-size:1.28rem; font-weight:800; color:var(--mango); font-variant-numeric:tabular-nums;}
+  .live-bar .lb-sub{font-size:.78rem; color:var(--ink-soft); font-weight:600; font-variant-numeric:tabular-nums;}
+  .live-bar .lb-go{margin-left:auto; flex:0 0 auto; font-weight:800; font-size:.85rem; color:#fff; background:var(--mango); padding:6px 13px; border-radius:999px; box-shadow:0 3px 9px rgba(216,118,26,.35);}
+  .live-bar:hover .lb-go{filter:brightness(1.05);}
+  .live-bar:focus-visible{outline:3px solid var(--mango); outline-offset:-3px;}
+  @media(max-width:520px){ .live-bar .lb-sub{display:none;} }
   @keyframes flashPulse{0%{transform:scale(1);}38%{transform:scale(1.18); color:var(--mango);}100%{transform:scale(1);}}
   .flash{display:inline-block; animation:flashPulse .55s ease;}
   @media (prefers-reduced-motion: reduce){ .flash{animation:none;} }
@@ -596,6 +614,14 @@
 </div>
 <div class="wrap">
 
+  <!-- Barra de resumen global (siempre visible, se actualiza en vivo) -->
+  <div class="live-bar" role="button" tabindex="0" onclick="showView('mercado')" onkeypress="if(event.key==='Enter')showView('mercado')" title="Ver mercado &amp; presupuesto">
+    <span class="lb-ic">🛒</span>
+    <div class="lb-txt"><span class="lb-lbl">Presupuesto por persona</span><b id="barAdulto">—</b></div>
+    <span class="lb-sub">total <span id="barTotal">—</span> · ÷20 · en vivo</span>
+    <span class="lb-go">Ver ›</span>
+  </div>
+
   <!-- ============ INICIO (hub) ============ -->
   <div id="view-home" class="view active">
     <header class="hero">
@@ -653,7 +679,7 @@
     <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
     <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 10:21 a.m.</b> (hora Colombia)</span>
+    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 10:30 a.m.</b> (hora Colombia)</span>
   </footer>
   </div>
 
@@ -1037,11 +1063,13 @@
     var fa=document.getElementById("factAdulto"); if(fa) fa.innerHTML = fmtK(perAdulto()).replace("k",'<span class="u">k</span>');
     var pa=document.getElementById("planAdulto"); if(pa) pa.textContent=fmt(perAdulto());
     var pt=document.getElementById("planTotal"); if(pt) pt.textContent=fmt(total());
+    var ba=document.getElementById("barAdulto"); if(ba) ba.textContent=fmt(perAdulto());
+    var bt=document.getElementById("barTotal"); if(bt) bt.textContent=fmt(total());
     renderMercado();
   }
 
   function flashLive(){
-    ["planAdulto","planTotal","mTotal","mAdulto","factAdulto"].forEach(function(id){
+    ["planAdulto","planTotal","mTotal","mAdulto","factAdulto","barAdulto","barTotal"].forEach(function(id){
       var el=document.getElementById(id); if(!el) return;
       el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
     });
