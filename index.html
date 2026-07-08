@@ -683,7 +683,7 @@
     <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
     <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 10:49 a.m.</b> (hora Colombia)</span>
+    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 11:07 a.m.</b> (hora Colombia)</span>
   </footer>
   </div>
 
@@ -969,18 +969,19 @@
     calentado:   {e:"🍳", n:"Calentado santandereano", c:70000, ing:[["Arroz (o sobras del asado)","1,5 kg",6000],["Huevos","30 u",20000],["Arepas","24 u",12000],["Chocolate + leche","1 caja + 3 L",24000],["Queso / mantequilla","surtido",8000]]},
     cachamas:    {e:"🐟", n:"Cachamas a la parrilla", c:215000, fam:"Rojas Sánchez (Jimmy) + Cendales Contreras (Sergio)", nota:"🎣 Las cachamas las llevan las familias de Jimmy y Sergio a un precio más económico (no salen del mercado común), pero se estiman aquí para ver el valor real.", ing:[["Cachamas (pescado, precio económico)","~10 kg",100000],["Yuca","4 kg",12000],["Papa","6 kg",17000],["Plátano (patacón)","15 u",22000],["Arroz","3 kg",12000],["Ensalada (tomate/cebolla/limón)","surtido",25000],["Aceite","1 L",12000],["Aliños / limón","surtido",15000]]},
     hamburguesas:{e:"🍔", n:"Hamburguesas", c:155000, fam:"Peralta Sánchez", ing:[["Carne molida (30 medallones)","2,5 kg",50000],["Pan de hamburguesa","30 u",30000],["Queso en lonchas","30 u",22000],["Tocineta","500 g",9000],["Lechuga, tomate, cebolla","3 kg",14000],["Mayonesa, mostaza, salsa","surtido",30000]]},
-    pescadofrito:{e:"🐟", n:"Pescado frito", c:180000, ing:[["Pescado (mojarra/bocachico)","8 kg",130000],["Yuca / patacón","surtido",25000],["Arroz","2 kg",8000],["Ensalada / limón","surtido",17000]]}
+    pescadofrito:{e:"🐟", n:"Pescado frito", c:180000, ing:[["Pescado (mojarra/bocachico)","8 kg",130000],["Yuca / patacón","surtido",25000],["Arroz","2 kg",8000],["Ensalada / limón","surtido",17000]]},
+    arepasrell:  {e:"🫓", n:"Arepas rellenas (carne, pollo y queso) + bebida", c:200000, ing:[["Arepas para rellenar","48 u",36000],["Carne desmechada","2,5 kg",50000],["Pollo desmechado","2,5 kg",28000],["Queso (rallado)","1,5 kg",30000],["Cebolla, tomate, aliños (guisos)","surtido",14000],["Bebida (gaseosa / jugo)","surtido",30000],["Salsas","surtido",12000]]}
   };
 
   // Comidas del fin de semana (slots) con sus opciones
   var SLOTS = [
-    {id:"s1", dia:"Sábado 18", mom:"Almuerzo (llegada)", tag:"llegada", opts:["arrozpollo","sancocho","asado","espaguetis"]},
-    {id:"s2", dia:"Sábado 18", mom:"Cena",               opts:["espaguetis","pizza","perros","picada"]},
+    {id:"s1", dia:"Sábado 18", mom:"Almuerzo (llegada)", tag:"llegada", opts:["arrozpollo","sancocho","asado","espaguetis","arepasrell"]},
+    {id:"s2", dia:"Sábado 18", mom:"Cena",               opts:["espaguetis","pizza","perros","picada","arepasrell"]},
     {id:"s3", dia:"Domingo 19", mom:"Desayuno",          opts:["caldo","huevosarepa","tamales","changua"]},
     {id:"s4", dia:"Domingo 19", mom:"Almuerzo",          opts:["cachamas","asado","sancocho"]},
-    {id:"s5", dia:"Domingo 19", mom:"Cena",              opts:["hamburguesas","perros","pizza"]},
+    {id:"s5", dia:"Domingo 19", mom:"Cena",              opts:["hamburguesas","perros","pizza","arepasrell"]},
     {id:"s6", dia:"Lunes 20", mom:"Desayuno",            opts:["calentado","caldo","huevosarepa"]},
-    {id:"s7", dia:"Lunes 20", mom:"Almuerzo (despedida)", opts:["sancocho","arrozpollo","pescadofrito"]}
+    {id:"s7", dia:"Lunes 20", mom:"Almuerzo (despedida)", opts:["sancocho","arrozpollo","pescadofrito","arepasrell"]}
   ];
   var DEFAULTS = {s1:"arrozpollo", s2:"espaguetis", s3:"caldo", s4:"cachamas", s5:"hamburguesas", s6:"calentado", s7:"sancocho"};
 
