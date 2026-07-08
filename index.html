@@ -509,7 +509,16 @@
   .sim-banner b{color:var(--sec);}
 
   /* ================= Planificador ================= */
+  .how-note{
+    background:var(--secbg); border:1px solid transparent; border-left:4px solid var(--sec);
+    border-radius:14px; padding:13px 16px; font-size:.93rem; color:var(--ink); margin-bottom:14px;
+  }
+  .how-note b{color:var(--sec);}
   .plan-top{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; margin-bottom:16px;}
+  .plan-sticky{position:sticky; top:8px; z-index:30; background:var(--paper); padding:10px; border-radius:16px; box-shadow:0 6px 18px rgba(60,45,20,.12); border:1px solid var(--line);}
+  @keyframes flashPulse{0%{transform:scale(1);}38%{transform:scale(1.18); color:var(--mango);}100%{transform:scale(1);}}
+  .flash{display:inline-block; animation:flashPulse .55s ease;}
+  @media (prefers-reduced-motion: reduce){ .flash{animation:none;} }
   .plan-live{
     background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
     padding:10px 16px; font-weight:800; font-variant-numeric:tabular-nums;
@@ -644,7 +653,7 @@
     <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
     <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 9:58 a.m.</b> (hora Colombia)</span>
+    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 10:21 a.m.</b> (hora Colombia)</span>
   </footer>
   </div>
 
@@ -720,8 +729,9 @@
     <div class="sec-head"><h2>🍽️ Planificador de menú</h2></div>
     <p class="sec-sub">Elige qué se come en cada momento — el costo del mercado se recalcula solo. 👇</p>
     <div class="sim-banner">🧪 <span><b>Simulación:</b> el menú y los costos son un estimado y <b>cambiarán según lo que la familia decida</b>.</span></div>
-    <div class="plan-top">
-      <div class="plan-live">Mercado por adulto <b id="planAdulto">—</b><small>÷20 · en vivo (total <span id="planTotal">—</span>)</small></div>
+    <div class="how-note">🔄 <b>¿Cómo funciona?</b> Toca las opciones de cada comida 👇 y verás cómo <b>la lista de mercado y el presupuesto se recalculan solos</b> (el número de arriba hace un pulso cada vez que cambia). Nada es fijo: es para hacernos una idea.</div>
+    <div class="plan-top plan-sticky">
+      <div class="plan-live">🛒 Mercado por adulto <b id="planAdulto">—</b><small>÷20 · EN VIVO · total <span id="planTotal">—</span></small></div>
       <button type="button" class="btn-reset" onclick="Paseo.reset()">↺ Restaurar sugerido</button>
     </div>
     <div id="planner"></div>
@@ -732,7 +742,8 @@
     <div class="backbar"><button type="button" onclick="showView('home')">← Volver al inicio</button></div>
     <div class="sec-head"><h2>🛒 Mercado &amp; presupuesto</h2></div>
     <p class="sec-sub">Se estima según el menú elegido en el planificador. Cambia los platos y el total se ajusta.</p>
-    <div class="sim-banner">🧪 <span><b>Simulación:</b> estimado que cambia con el menú. El alojamiento ($100.000/persona) va aparte.</span></div>
+    <div class="sim-banner">🔄 <span><b>Esto se calcula solo</b> a partir del menú del <b>🍽️ Planificador</b>: si allí cambian un plato, <b>esta lista y el total se ajustan</b>. <i>(Estimado; el alojamiento $100.000/persona va aparte.)</i></span></div>
+    <div class="how-note" style="margin-bottom:18px;">👉 ¿Quieren probar otras comidas? Vayan a <b>🍽️ Planificador</b>, cambien los platos, y vuelvan aquí para ver el nuevo presupuesto. <button type="button" class="btn-reset" style="margin-left:6px;" onclick="showView('menu')">Abrir Planificador</button></div>
     <div class="budget">
       <div class="budget-hd">
         <span class="lbl">💵 Presupuesto del mercado</span>
@@ -1029,8 +1040,15 @@
     renderMercado();
   }
 
+  function flashLive(){
+    ["planAdulto","planTotal","mTotal","mAdulto","factAdulto"].forEach(function(id){
+      var el=document.getElementById(id); if(!el) return;
+      el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+    });
+  }
+
   var Paseo = {
-    pick:function(slotId, dishId){ sel[slotId]=dishId; save(); renderPlanner(); recalc(); },
+    pick:function(slotId, dishId){ sel[slotId]=dishId; save(); renderPlanner(); recalc(); flashLive(); },
     reset:function(){ SLOTS.forEach(function(s){ sel[s.id]=DEFAULTS[s.id]; }); save(); renderPlanner(); recalc(); },
     show:function(name){
       var views=document.querySelectorAll(".view");
