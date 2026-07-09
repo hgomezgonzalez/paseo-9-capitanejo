@@ -631,6 +631,20 @@
   #shopList .market{gap:14px;}
   .items .mtag{color:var(--ink-soft); font-size:.78em; font-weight:600;}
 
+  /* ================= Itinerario ================= */
+  .hub-btn.s-itin{--sec:#b25a86; --secbg:rgba(178,90,134,.16);}
+  #view-itinerario{--sec:#b25a86; --secbg:rgba(178,90,134,.16);}
+  .itin-day{display:flex; align-items:center; gap:10px; margin:24px 0 12px;}
+  .itin-day .day-pill{background:var(--sec);}
+  .itin-day .dd{color:var(--ink-soft); font-weight:700; font-size:.92rem;}
+  .itin-list{position:relative; margin:0 0 4px 9px; padding-left:20px; border-left:2px solid var(--line);}
+  .itin-item{position:relative; padding:0 0 16px 4px;}
+  .itin-item::before{content:""; position:absolute; left:-27px; top:3px; width:13px; height:13px; border-radius:50%; background:var(--sec); box-shadow:0 0 0 3px var(--paper);}
+  .itin-item .it-time{display:block; font-weight:800; font-size:.8rem; color:var(--sec); letter-spacing:.01em;}
+  .itin-item .it-body{margin-top:3px; font-size:.94rem; color:var(--ink); line-height:1.5;}
+  .itin-item.hl .it-body{background:var(--secbg); border:1px solid var(--sec); border-radius:12px; padding:10px 13px;}
+  .itin-item.hl::before{background:#e0568a; box-shadow:0 0 0 3px var(--paper), 0 0 9px rgba(224,86,138,.75);}
+
   /* ================= Cómo llegar (rutas) ================= */
   .mapimg{display:block; position:relative; margin:6px 0 16px; border-radius:16px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--line); cursor:pointer;}
   .mapimg img{display:block; width:100%; height:auto;}
@@ -719,6 +733,9 @@
       <button type="button" class="hub-btn s-llegar" onclick="showView('llegar')">
         <span class="ic">📍</span><span><span class="tt">Cómo llegar</span><span class="ds">Ruta desde Bogotá y desde Cúcuta</span></span><span class="go">›</span>
       </button>
+      <button type="button" class="hub-btn s-itin" onclick="showView('itinerario')">
+        <span class="ic">📅</span><span><span class="tt">Itinerario</span><span class="ds">Bitácora de actividades, de la llegada a la salida</span></span><span class="go">›</span>
+      </button>
       <button type="button" class="hub-btn s-logi" onclick="showView('logistica')">
         <span class="ic">🧭</span><span><span class="tt">Sugerencias</span><span class="ds">Plata, dónde comprar y consejos</span></span><span class="go">›</span>
       </button>
@@ -726,7 +743,7 @@
     <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
     <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 8:48 p.m.</b> (hora Colombia)</span>
+    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 9:04 p.m.</b> (hora Colombia)</span>
   </footer>
   </div>
 
@@ -927,6 +944,49 @@
     <div class="callout" style="margin-top:14px;">🍽️ <b>Menaje incluido:</b> la finca ya tiene menaje (ollas, platos y cubiertos), así que no hay que llevarlo — solo una olla grande extra para el sancocho si se quiere.</div>
   </div>
 
+  <!-- ============ ITINERARIO ============ -->
+  <div id="view-itinerario" class="view s-itin">
+    <div class="backbar"><button type="button" onclick="showView('home')">← Volver al inicio</button></div>
+    <div class="sec-head"><h2>📅 Itinerario</h2></div>
+    <p class="sec-sub">Bitácora <b>sugerida</b> de actividades, de la llegada a la salida. Es una guía flexible — se ajusta a lo que la familia quiera. 🙂</p>
+
+    <div class="itin">
+      <div class="itin-day"><span class="day-pill">Sábado 18</span><span class="dd">Llegada 🚗</span></div>
+      <div class="itin-list">
+        <div class="itin-item"><span class="it-time">Temprano · mañana</span><div class="it-body"><b>Salida.</b> Familias de <b>Bogotá</b> (~6–7 h por Soatá) y de <b>Cúcuta</b> (~5–6 h por Pamplona–Málaga). Tanquear y salir con tiempo, con descanso en la vía.</div></div>
+        <div class="itin-item"><span class="it-time">11:00 a.m. – 2:00 p.m.</span><div class="it-body"><b>Llegada escalonada</b> a la finca en Capitanejo. Check-in (10 a.m.–6 p.m.). Parqueo: 2 carros + motos dentro, 2 carros al frente.</div></div>
+        <div class="itin-item"><span class="it-time">Al llegar</span><div class="it-body"><b>Acomodación</b> en las habitaciones (ver "🏡 La finca & dormida") y refrescarse del viaje.</div></div>
+        <div class="itin-item"><span class="it-time">1:00 – 2:30 p.m.</span><div class="it-body"><b>Almuerzo de llegada</b> (según el menú del Planificador). Turno de cocina: la(s) familia(s) asignada(s).</div></div>
+        <div class="itin-item"><span class="it-time">Tarde</span><div class="it-body">Organizar el <b>mercado y la nevera</b>, estrenar la <b>piscina</b> 🏊, recorrer la finca y descansar.</div></div>
+        <div class="itin-item"><span class="it-time">6:00 – 7:30 p.m.</span><div class="it-body"><b>Cena</b> (según menú).</div></div>
+        <div class="itin-item"><span class="it-time">Noche</span><div class="it-body"><b>Fogata</b> 🔥, música, <b>dominós, bingo y juegos de mesa</b> 🎲 e integración. A descansar temprano (el domingo es el día grande).</div></div>
+      </div>
+
+      <div class="itin-day"><span class="day-pill">Domingo 19</span><span class="dd">Día de piscina 🏊 · ¡Cumpleaños de Mireya! 🎂</span></div>
+      <div class="itin-list">
+        <div class="itin-item"><span class="it-time">7:30 – 9:00 a.m.</span><div class="it-body"><b>Desayuno</b> y café (según menú).</div></div>
+        <div class="itin-item"><span class="it-time">Mañana</span><div class="it-body"><b>Piscina</b>, sol, deportes (fútbol/voleibol) y caminata o paseo corto por San José de Miranda / Capitanejo.</div></div>
+        <div class="itin-item"><span class="it-time">12:30 – 2:00 p.m.</span><div class="it-body"><b>Almuerzo fuerte</b> (p. ej. cachamas 🐟) y sobremesa.</div></div>
+        <div class="itin-item"><span class="it-time">Tarde</span><div class="it-body">Siesta, más piscina, <b>torneo de dominós y bingo</b> 🎲 (y demás juegos de mesa), música y <b>fotos familiares</b> 📸.</div></div>
+        <div class="itin-item"><span class="it-time">4:30 – 5:30 p.m.</span><div class="it-body"><b>Onces</b>: fruta, aguapanela con limón y mecato.</div></div>
+        <div class="itin-item hl"><span class="it-time">🎉 Tarde–noche</span><div class="it-body"><b>¡Cumpleaños de Mireya!</b> 🎂 Partida de torta y celebración en familia. <b>Vestuario:</b> camiseta <b>blanca</b> + jean, o camiseta <b>roja</b> + jean (opcional) 👕.</div></div>
+        <div class="itin-item"><span class="it-time">6:30 – 8:00 p.m.</span><div class="it-body"><b>Cena</b> (según menú).</div></div>
+        <div class="itin-item"><span class="it-time">Noche</span><div class="it-body"><b>Fogata</b> 🔥, karaoke/baile, <b>dominós, bingo y juegos de mesa</b> 🎲, anécdotas y malvaviscos. Noche de integración familiar.</div></div>
+      </div>
+
+      <div class="itin-day"><span class="day-pill">Lunes 20</span><span class="dd">Despedida · festivo 👋</span></div>
+      <div class="itin-list">
+        <div class="itin-item"><span class="it-time">7:30 – 9:00 a.m.</span><div class="it-body"><b>Desayuno</b>.</div></div>
+        <div class="itin-item"><span class="it-time">Mañana</span><div class="it-body"><b>Empacar y recoger</b>, últimas fotos y <b>aseo general</b> de la finca (dejar todo ordenado, sacar la basura).</div></div>
+        <div class="itin-item"><span class="it-time">11:30 a.m. – 1:00 p.m.</span><div class="it-body"><b>Almuerzo de despedida</b> (sancocho 🥘 / lo elegido).</div></div>
+        <div class="itin-item"><span class="it-time">Antes de 2:00 p.m.</span><div class="it-body"><b>Check-out y salida.</b> Repartir sobras, coordinar la caravana de regreso y tanquear.</div></div>
+        <div class="itin-item"><span class="it-time">Tarde</span><div class="it-body"><b>Regreso seguro</b> a Bogotá y Cúcuta 🚗. ¡Manejar con precaución en la montaña!</div></div>
+      </div>
+    </div>
+
+    <div class="callout">💡 <b>Tips:</b> repartir por turnos la cocina y el aseo (ver familias asignadas en el Planificador), hidratarse, usar bloqueador y repelente, y cuadrar los horarios de cocina para que nadie se recargue. Todo es <b>flexible</b> y ajustable el día del paseo. 🙂</div>
+  </div>
+
   <!-- ============ CÓMO ATACARLO ============ -->
   <div id="view-logistica" class="view s-logi">
     <div class="backbar"><button type="button" onclick="showView('home')">← Volver al inicio</button></div>
@@ -1018,7 +1078,7 @@
     pizza:       {e:"🍕", n:"Pizza casera", c:98000, nota:"≈1 porción por persona (para 24)", ing:[["Masas / harina (≈6 pizzas)","surtido",18000],["Queso mozzarella","2 kg",40000],["Jamón / salami","surtido",20000],["Salsa de tomate","surtido",8000],["Champiñón / pimentón","surtido",12000]]},
     perros:      {e:"🌭", n:"Perros calientes", c:74000, nota:"1 por persona (24)", ing:[["Salchichas","24 u",27000],["Pan de perro","24 u",18000],["Papa ripio","surtido",8000],["Salsas","surtido",13000],["Queso / piña","surtido",8000]]},
     picada:      {e:"🍢", n:"Picada / sánduches", c:95000, ing:[["Chorizo / carnes frías","surtido",40000],["Pan / arepa","surtido",20000],["Papa","surtido",15000],["Salsas / queso","surtido",20000]]},
-    pasabocas:   {e:"🥟", n:"Pasabocas / picada de la noche", c:125000, nota:"Cena ligera para picar", ing:[["Empanadas / deditos / pasteles","48 u",45000],["Papas / patacones / chips","surtido",22000],["Salchichas / mini chorizos","surtido",28000],["Queso / picada fría","surtido",18000],["Salsas","surtido",12000]]},
+    pasabocas:   {e:"🥟", n:"Pasabocas / picada de la noche", c:150000, nota:"Cena ligera para picar", ing:[["Empanadas / deditos / pasteles","48 u",45000],["Pan de sagú","48 u",25000],["Papas / patacones / chips","surtido",22000],["Salchichas / mini chorizos","surtido",28000],["Queso / picada fría","surtido",18000],["Salsas","surtido",12000]]},
     caldo:       {e:"🍲", n:"Caldo de costilla + arepa", c:105000, ing:[["Costilla de res","2,5 kg",45000],["Arepas","24 u",12000],["Papa + criolla","4 kg",16000],["Cebolla larga / cilantro","surtido",8000],["Chocolate + leche","1 caja + 3 L",24000]]},
     huevosarepa: {e:"🍳", n:"Huevos + arepa + chocolate", c:60000, ing:[["Huevos","40 u",26000],["Arepas","24 u",12000],["Queso / mantequilla","surtido",10000],["Chocolate + leche","surtido",12000]]},
     tamales:     {e:"🫔", n:"Tamales + chocolate", c:150000, ing:[["Tamales","24 u",132000],["Chocolate + pan","surtido",18000]]},
@@ -1043,7 +1103,7 @@
   ];
   var DEFAULTS = {s1:"arrozmixto", s2:"espaguetis", s3:"caldo", s4:"cachamas", s5:"hamburguesas", s6:"calentado", s7:"sancocho"};
 
-  var FAMILIES = ["Peralta Sánchez","Gómez Sánchez","Cendales Sánchez","Cendales Cacua","Cendales Contreras","Sánchez Yáñez","Daniela","Hans","Arantza"];
+  var FAMILIES = ["Peralta Sánchez","Gómez Sánchez","Cendales Sánchez","Cendales Cacua","Cendales Contreras","Sánchez Yáñez","Daniela","Hans","Arantza","Rojas Sánchez"];
 
   var sel = {}, fams = {};
   function applyState(o){
