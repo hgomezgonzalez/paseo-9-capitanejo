@@ -634,16 +634,18 @@
   /* ================= Itinerario ================= */
   .hub-btn.s-itin{--sec:#b25a86; --secbg:rgba(178,90,134,.16);}
   #view-itinerario{--sec:#b25a86; --secbg:rgba(178,90,134,.16);}
-  .itin-day{display:flex; align-items:center; gap:10px; margin:24px 0 12px;}
+  .itin{background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:18px 20px 10px; margin-top:8px;}
+  .itin-day{display:flex; align-items:center; flex-wrap:wrap; gap:8px 10px; margin:22px 0 12px;}
+  .itin > .itin-day:first-child{margin-top:2px;}
   .itin-day .day-pill{background:var(--sec);}
-  .itin-day .dd{color:var(--ink-soft); font-weight:700; font-size:.92rem;}
+  .itin-day .dd{color:var(--ink); font-weight:700; font-size:.92rem;}
   .itin-list{position:relative; margin:0 0 4px 9px; padding-left:20px; border-left:2px solid var(--line);}
   .itin-item{position:relative; padding:0 0 16px 4px;}
-  .itin-item::before{content:""; position:absolute; left:-27px; top:3px; width:13px; height:13px; border-radius:50%; background:var(--sec); box-shadow:0 0 0 3px var(--paper);}
+  .itin-item::before{content:""; position:absolute; left:-27px; top:3px; width:13px; height:13px; border-radius:50%; background:var(--sec); box-shadow:0 0 0 3px var(--surface);}
   .itin-item .it-time{display:block; font-weight:800; font-size:.8rem; color:var(--sec); letter-spacing:.01em;}
   .itin-item .it-body{margin-top:3px; font-size:.94rem; color:var(--ink); line-height:1.5;}
   .itin-item.hl .it-body{background:var(--secbg); border:1px solid var(--sec); border-radius:12px; padding:10px 13px;}
-  .itin-item.hl::before{background:#e0568a; box-shadow:0 0 0 3px var(--paper), 0 0 9px rgba(224,86,138,.75);}
+  .itin-item.hl::before{background:#e0568a; box-shadow:0 0 0 3px var(--surface), 0 0 9px rgba(224,86,138,.75);}
 
   /* ================= Cómo llegar (rutas) ================= */
   .mapimg{display:block; position:relative; margin:6px 0 16px; border-radius:16px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--line); cursor:pointer;}
@@ -743,7 +745,7 @@
     <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
     <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 9:04 p.m.</b> (hora Colombia)</span>
+    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 9:16 p.m.</b> (hora Colombia)</span>
   </footer>
   </div>
 
@@ -1071,20 +1073,21 @@
 
   // Biblioteca de platos: id -> {emoji, nombre, costo, fam, nota, ing:[[item,cant,costo]]}
   var D = {
-    arrozmixto:  {e:"🍚", n:"Arroz mixto", c:185000, ing:[["Arroz","5 kg",20000],["Pollo","3 kg",33000],["Cerdo","2 kg",36000],["Camarones","1 kg",30000],["Chorizo","12 u",24000],["Verduras (arveja/zanahoria/pimentón)","surtido",22000],["Cebolla, tomate, ajo, aliños","surtido",12000],["Aceite / condimentos","surtido",8000]]},
+    arrozmixto:  {e:"🍚", n:"Arroz mixto", c:155000, ing:[["Arroz","5 kg",20000],["Pollo","3 kg",33000],["Cerdo","2 kg",36000],["Chorizo","12 u",24000],["Verduras (arveja/zanahoria/pimentón)","surtido",22000],["Cebolla, tomate, ajo, aliños","surtido",12000],["Aceite / condimentos","surtido",8000]]},
     sancocho:    {e:"🥘", n:"Sancocho de gallina", c:191000, ing:[["Gallina / pollo","6 kg",72000],["Costilla de res","1,5 kg",27000],["Papa","6 kg",17000],["Yuca","3 kg",9000],["Plátano verde","12 u",18000],["Mazorca","12 u",24000],["Arroz","1,5 kg",6000],["Cebolla larga, cilantro, verduras","surtido",18000]]},
-    asado:       {e:"🔥", n:"Asado / parrillada", c:430000, ing:[["Res para asar","6 kg",192000],["Pollo","4 kg",44000],["Chorizo / butifarra","30 u",60000],["Papa","6 kg",17000],["Yuca","3 kg",9000],["Arepas","12 u",6000],["Aguacate (guacamole)","12 u",36000],["Ensalada (tomate/cebolla/lechuga)","4 kg",18000],["Arroz","2 kg",8000],["Carbón + encendedor","2 bultos",40000]]},
+    asado:       {e:"🔥", n:"Asado en barril", c:364000, nota:"Al barril (res y pollo)", ing:[["Res para asar","6 kg",192000],["Pollo","4 kg",44000],["Papa","6 kg",17000],["Yuca","3 kg",9000],["Aguacate (guacamole)","12 u",36000],["Ensalada (tomate/cebolla/lechuga)","4 kg",18000],["Arroz","2 kg",8000],["Carbón + encendedor","2 bultos",40000]]},
     espaguetis:  {e:"🍝", n:"Espaguetis a la boloñesa", c:107000, ing:[["Espagueti","3 kg",18000],["Carne molida","2,5 kg",50000],["Salsa / pasta de tomate","4 latas",16000],["Cebolla, tomate, pimentón","2 kg",12000],["Pan tajado (al ajo)","1",6000],["Queso para rallar","300 g",5000]]},
     pizza:       {e:"🍕", n:"Pizza casera", c:98000, nota:"≈1 porción por persona (para 24)", ing:[["Masas / harina (≈6 pizzas)","surtido",18000],["Queso mozzarella","2 kg",40000],["Jamón / salami","surtido",20000],["Salsa de tomate","surtido",8000],["Champiñón / pimentón","surtido",12000]]},
     perros:      {e:"🌭", n:"Perros calientes", c:74000, nota:"1 por persona (24)", ing:[["Salchichas","24 u",27000],["Pan de perro","24 u",18000],["Papa ripio","surtido",8000],["Salsas","surtido",13000],["Queso / piña","surtido",8000]]},
     picada:      {e:"🍢", n:"Picada / sánduches", c:95000, ing:[["Chorizo / carnes frías","surtido",40000],["Pan / arepa","surtido",20000],["Papa","surtido",15000],["Salsas / queso","surtido",20000]]},
     pasabocas:   {e:"🥟", n:"Pasabocas / picada de la noche", c:150000, nota:"Cena ligera para picar", ing:[["Empanadas / deditos / pasteles","48 u",45000],["Pan de sagú","48 u",25000],["Papas / patacones / chips","surtido",22000],["Salchichas / mini chorizos","surtido",28000],["Queso / picada fría","surtido",18000],["Salsas","surtido",12000]]},
     caldo:       {e:"🍲", n:"Caldo de costilla + arepa", c:105000, ing:[["Costilla de res","2,5 kg",45000],["Arepas","24 u",12000],["Papa + criolla","4 kg",16000],["Cebolla larga / cilantro","surtido",8000],["Chocolate + leche","1 caja + 3 L",24000]]},
+    caldohuevo:  {e:"🍲", n:"Caldo de huevo y papa + arepa", c:70000, ing:[["Huevos","30 u",18000],["Papa","4 kg",12000],["Arepas","24 u",12000],["Cebolla larga, cilantro, aliños","surtido",8000],["Chocolate + café + leche","surtido",20000]]},
     huevosarepa: {e:"🍳", n:"Huevos + arepa + chocolate", c:60000, ing:[["Huevos","40 u",26000],["Arepas","24 u",12000],["Queso / mantequilla","surtido",10000],["Chocolate + leche","surtido",12000]]},
     tamales:     {e:"🫔", n:"Tamales + chocolate", c:150000, ing:[["Tamales","24 u",132000],["Chocolate + pan","surtido",18000]]},
     changua:     {e:"🥣", n:"Changua santandereana", c:70000, ing:[["Leche","6 L",24000],["Huevos","24 u",16000],["Cebolla larga / cilantro","surtido",8000],["Pan / arepa / calado","surtido",12000],["Queso","surtido",10000]]},
     calentado:   {e:"🍳", n:"Calentado santandereano", c:70000, ing:[["Arroz (o sobras del asado)","1,5 kg",6000],["Huevos","30 u",20000],["Arepas","24 u",12000],["Chocolate + leche","1 caja + 3 L",24000],["Queso / mantequilla","surtido",8000]]},
-    cachamas:    {e:"🐟", n:"Cachamas a la parrilla", c:215000, nota:"🎣 Las cachamas las llevan las familias de Jimmy y Sergio a un precio más económico (no salen del mercado común), pero se estiman aquí para ver el valor real.", ing:[["Cachamas (pescado, precio económico)","~10 kg",100000],["Yuca","4 kg",12000],["Papa","6 kg",17000],["Plátano (patacón)","15 u",22000],["Arroz","3 kg",12000],["Ensalada (tomate/cebolla/limón)","surtido",25000],["Aceite","1 L",12000],["Aliños / limón","surtido",15000]]},
+    cachamas:    {e:"🐟", n:"Cachamas a la parrilla", c:193000, nota:"🎣 Las cachamas las llevan las familias de Jimmy y Sergio a un precio más económico (no salen del mercado común), pero se estiman aquí para ver el valor real.", ing:[["Cachamas (pescado, precio económico)","~10 kg",100000],["Yuca","4 kg",12000],["Papa","6 kg",17000],["Arroz","3 kg",12000],["Ensalada (tomate/cebolla/limón)","surtido",25000],["Aceite","1 L",12000],["Aliños / limón","surtido",15000]]},
     hamburguesas:{e:"🍔", n:"Hamburguesas", c:130000, nota:"1 por persona (24 medallones)", ing:[["Carne molida (24 medallones)","2 kg",40000],["Pan de hamburguesa","24 u",24000],["Queso en lonchas","24 u",18000],["Tocineta","400 g",8000],["Lechuga, tomate, cebolla","2,5 kg",12000],["Mayonesa, mostaza, salsa","surtido",28000]]},
     hambcombo:   {e:"🍔", n:"Hamburguesa + papas fritas + bebida", c:200000, nota:"Combo: 1 por persona (24)", ing:[["Carne molida (24 medallones)","2 kg",40000],["Pan de hamburguesa","24 u",24000],["Queso en lonchas","24 u",18000],["Tocineta","400 g",8000],["Lechuga, tomate, cebolla","2,5 kg",12000],["Papas a la francesa","5 kg",40000],["Bebida (gaseosa / jugo)","24 u",30000],["Salsas (mayo/mostaza/tomate)","surtido",28000]]},
     pescadofrito:{e:"🐟", n:"Pescado frito", c:180000, ing:[["Pescado (mojarra/bocachico)","8 kg",130000],["Yuca / patacón","surtido",25000],["Arroz","2 kg",8000],["Ensalada / limón","surtido",17000]]},
@@ -1098,7 +1101,7 @@
     {id:"s3", dia:"Domingo 19", mom:"Desayuno",          opts:["caldo","huevosarepa","tamales","changua"]},
     {id:"s4", dia:"Domingo 19", mom:"Almuerzo",          opts:["cachamas","asado","sancocho"]},
     {id:"s5", dia:"Domingo 19", mom:"Cena",              opts:["hamburguesas","hambcombo","perros","pizza","arepasrell","pasabocas"]},
-    {id:"s6", dia:"Lunes 20", mom:"Desayuno",            opts:["calentado","caldo","huevosarepa"]},
+    {id:"s6", dia:"Lunes 20", mom:"Desayuno",            opts:["calentado","caldo","caldohuevo","huevosarepa"]},
     {id:"s7", dia:"Lunes 20", mom:"Almuerzo (despedida)", opts:["sancocho","arrozmixto","pescadofrito","arepasrell"]}
   ];
   var DEFAULTS = {s1:"arrozmixto", s2:"espaguetis", s3:"caldo", s4:"cachamas", s5:"hamburguesas", s6:"calentado", s7:"sancocho"};
