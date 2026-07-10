@@ -499,6 +499,8 @@
   .hub-btn.s-mercado{--sec:var(--leaf); --secbg:var(--leaf-soft);}
   .hub-btn.s-logi{--sec:#8a68a8; --secbg:rgba(138,104,168,.16);}
   .hub-btn.s-llegar{--sec:#2f86b4; --secbg:rgba(47,134,180,.14);}
+  .hub-btn.s-confirm{--sec:#c9971f; --secbg:rgba(201,151,31,.16);}
+  .view.s-confirm{--sec:#c9971f; --secbg:rgba(201,151,31,.16);}
 
   /* Banner de simulación */
   .sim-banner{
@@ -665,6 +667,142 @@
   .route ol li{margin:5px 0;}
   .route .rtip{padding:0 16px 15px; font-size:.84rem; color:var(--ink-soft);}
 
+  /* ================= Confirmados & cuota ================= */
+  /* --paid = alojamiento real/pagado (verde) · --bud = presupuesto mercado (dorado) */
+  .conf-summary{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:4px 0 12px;}
+  @media(max-width:600px){ .conf-summary{grid-template-columns:1fr;} }
+  .cs-block{
+    display:flex; flex-direction:column; gap:4px; border-radius:16px; padding:16px 18px; box-shadow:var(--shadow);
+    background:var(--surface); border:1.5px solid var(--acc); position:relative; overflow:hidden;
+  }
+  .cs-block::before{content:""; position:absolute; inset:0 auto 0 0; width:5px; background:var(--acc);}
+  .cs-paid{--acc:#1f9d5b;}
+  .cs-budget{--acc:#c9971f; border-style:dashed;}
+  .cs-tag{align-self:flex-start; font-size:.68rem; font-weight:900; letter-spacing:.04em; color:#fff; background:var(--acc); padding:3px 10px; border-radius:999px; margin-bottom:2px;}
+  .cs-lbl{font-size:.8rem; font-weight:800; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.02em;}
+  .cs-big{font-size:2.05rem; font-weight:900; color:var(--acc); line-height:1.05; letter-spacing:-.02em; font-variant-numeric:tabular-nums;}
+  .cs-sub{font-size:.82rem; color:var(--ink-soft); font-variant-numeric:tabular-nums;}
+
+  .conf-grand{
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px; margin:2px 0 8px;
+    background:var(--secbg); border:1px solid var(--sec); border-radius:13px; padding:11px 16px; font-weight:700; color:var(--ink-soft); font-size:.86rem;
+  }
+  .conf-grand .cg-paid{color:#1f9d5b; font-weight:900; font-variant-numeric:tabular-nums;}
+  .conf-grand .cg-pend{color:#c9971f; font-weight:900; font-variant-numeric:tabular-nums;}
+  .conf-grand > span{font-weight:700; color:var(--ink);}
+  .conf-grand > span b{font-size:1.05rem; color:var(--sec); font-variant-numeric:tabular-nums;}
+
+  /* roster de confirmados (íconos por edad + estado pagado/pendiente) */
+  .conf-rosterhd{display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin:16px 0 4px;}
+  .conf-rosterhd .cb-lbl{font-weight:800; font-size:.95rem; color:var(--ink);}
+  .conf-statuslegend{display:flex; flex-wrap:wrap; gap:8px 18px; margin:6px 0; padding:9px 13px; background:var(--surface); border:1px solid var(--line); border-radius:11px;}
+  .conf-statuslegend .sl-item{display:inline-flex; align-items:center; gap:7px; font-size:.8rem; color:var(--ink-soft); font-weight:600;}
+  .conf-statuslegend .sl-item b{color:var(--ink);}
+  .conf-agelegend{display:flex; flex-wrap:wrap; align-items:center; gap:5px 14px; margin:2px 0 2px; font-size:.76rem; color:var(--ink-soft); font-weight:700;}
+  .ag-dot{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--acol); margin-right:-8px;}
+
+  .conf-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; margin-top:10px;}
+  .conf-card{
+    position:relative; display:flex; align-items:center; gap:11px; background:var(--surface);
+    border:1px solid var(--line); border-radius:12px; padding:9px 12px; box-shadow:var(--shadow);
+    transition:transform .12s, border-color .12s;
+  }
+  .conf-card:hover{transform:translateY(-2px); border-color:var(--sec);}
+  .conf-card .cf-av{
+    position:relative; flex:0 0 auto; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:color-mix(in srgb, var(--acol) 16%, transparent); box-shadow:inset 0 0 0 1.6px var(--acol);
+  }
+  .conf-card .cf-ico{width:24px; height:24px; color:var(--acol); display:flex;}
+  .conf-card .cf-ico svg{width:100%; height:100%; display:block;}
+  .conf-card .cf-no{
+    position:absolute; right:-4px; bottom:-4px; min-width:17px; height:17px; padding:0 3px; box-sizing:border-box;
+    border-radius:999px; background:var(--acol); color:#fff; font-size:.62rem; font-weight:900;
+    display:flex; align-items:center; justify-content:center; font-variant-numeric:tabular-nums; box-shadow:0 0 0 2px var(--surface);
+  }
+  .conf-card .cf-info{display:flex; flex-direction:column; gap:2px; min-width:0; flex:1 1 auto;}
+  .conf-card .cf-name{font-weight:800; font-size:.9rem; line-height:1.15; color:var(--ink);}
+  .conf-card .cf-meta{display:flex; flex-wrap:wrap; align-items:center; gap:4px 7px; min-width:0;}
+  .cf-cat{font-size:.66rem; font-weight:800; letter-spacing:.02em; color:var(--acol); background:color-mix(in srgb, var(--acol) 13%, transparent); border:1px solid color-mix(in srgb, var(--acol) 40%, transparent); border-radius:999px; padding:1px 8px; white-space:nowrap;}
+  .conf-card .cf-nota{font-size:.72rem; color:var(--ink-soft); line-height:1.2;}
+
+  /* estado: pagado (verde) / pendiente (ámbar) */
+  .cf-status{flex:0 0 auto; display:flex; gap:5px;}
+  .st{position:relative; flex:0 0 auto; width:26px; height:26px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; box-shadow:var(--shadow);}
+  .st svg{width:15px; height:15px;}
+  .st .stk{position:absolute; right:-3px; bottom:-4px; font-size:.6rem; font-weight:900; width:13px; height:13px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; box-shadow:0 0 0 1.5px var(--surface);}
+  .st-paid{background:rgba(31,157,91,.14); color:#1f9d5b;}
+  .st-paid .stk{background:#1f9d5b;}
+  .st-pend{background:rgba(201,151,31,.16); color:#b5850f;}
+  .st-pend .stk{background:#c9971f;}
+  .st.mini{width:22px; height:22px; border-radius:7px; box-shadow:none;}
+  .st.mini svg{width:13px; height:13px;}
+
+  /* 🎂 Caja elegante de la cumpleañera (Mireya · 53) — banner de ancho completo */
+  .conf-card.bday{
+    grid-column:1 / -1; position:relative; overflow:hidden; gap:16px;
+    padding:18px 22px; border-radius:18px; border:1px solid rgba(212,175,94,.55);
+    background:
+      radial-gradient(120% 160% at 8% 0%, rgba(224,140,170,.22), transparent 42%),
+      linear-gradient(115deg, #241528 0%, #34203c 42%, #45283f 68%, #241528 100%);
+    color:#fff; box-shadow:0 12px 34px rgba(70,25,55,.42);
+  }
+  .conf-card.bday:hover{transform:translateY(-2px); border-color:rgba(212,175,94,.9);}
+  .conf-card.bday .cf-av{
+    width:46px; height:46px; background:rgba(212,175,94,.16);
+    box-shadow:inset 0 0 0 1.5px rgba(212,175,94,.85), 0 0 18px rgba(212,175,94,.35);
+  }
+  .conf-card.bday .cf-ico{width:26px; height:26px; color:#efd79a;}
+  .conf-card.bday .cf-no{background:#c9971f; box-shadow:0 0 0 2px #2c1a30;}
+  .conf-card.bday .cf-info{gap:3px;}
+  .bday-eyebrow{
+    font-size:.66rem; font-weight:800; letter-spacing:.28em; text-transform:uppercase;
+    color:#e8c877;
+  }
+  .conf-card.bday .cf-name{
+    font-size:1.28rem; font-weight:900; letter-spacing:-.01em; line-height:1.1;
+    background:linear-gradient(90deg,#fff 0%,#f6e2b6 55%,#e8c877 100%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:#f6e2b6;
+  }
+  .bday-sub{font-size:.8rem; color:rgba(255,255,255,.82);}
+  .bday-sub b{color:#e8c877;}
+  .bday-age{
+    flex:0 0 auto; margin-left:auto; text-align:center; display:flex; flex-direction:column; align-items:center; line-height:1;
+    padding:8px 16px; border-radius:14px; border:1px solid rgba(212,175,94,.5);
+    background:linear-gradient(160deg, rgba(212,175,94,.22), rgba(212,175,94,.06));
+  }
+  .bday-age b{
+    font-size:2.1rem; font-weight:900; letter-spacing:-.03em; font-variant-numeric:tabular-nums;
+    background:linear-gradient(180deg,#fbeec8,#e0b84f); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:#e0b84f;
+  }
+  .bday-age small{font-size:.62rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.78); margin-top:2px;}
+  .bday-shine{
+    position:absolute; top:0; bottom:0; left:-60%; width:45%; pointer-events:none;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.16) 50%, transparent);
+    transform:skewX(-16deg); animation:bdayShine 4.6s ease-in-out infinite;
+  }
+  @keyframes bdayShine{0%,100%{left:-60%;} 55%{left:120%;}}
+  @media (prefers-reduced-motion: reduce){ .bday-shine{display:none;} }
+  @media(max-width:430px){
+    .conf-card.bday{flex-wrap:wrap; gap:12px;}
+    .conf-card.bday .cf-name{font-size:1.12rem;}
+    .bday-age b{font-size:1.7rem;}
+  }
+
+  .conf-babies{display:flex; flex-wrap:wrap; align-items:center; gap:9px; margin:18px 0 4px; padding:14px 15px; background:var(--secbg); border:1px dashed var(--sec); border-radius:14px;}
+  .conf-babies .cb-lbl{font-weight:800; font-size:.86rem; color:var(--ink); width:100%;}
+  .conf-babies .baby-chip{display:inline-flex; align-items:center; gap:5px; font-size:.83rem; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:5px 12px;}
+  .conf-babies .baby-chip em{color:var(--ink-soft); font-style:normal; font-weight:700;}
+  .conf-babies .baby-chip.pet{background:rgba(201,151,31,.12); border-color:var(--sec);}
+
+  /* Tiempos por tramo en las rutas */
+  .route ol li .leg-row{display:flex; flex-wrap:wrap; align-items:baseline; gap:3px 8px;}
+  .route ol li .leg-d{flex:1 1 auto; min-width:0;}
+  .route ol li .leg-t{
+    margin-left:auto; flex:0 0 auto; font-size:.72rem; font-weight:800; white-space:nowrap;
+    color:var(--sec); background:var(--secbg); border:1px solid var(--sec);
+    border-radius:999px; padding:2px 9px; font-variant-numeric:tabular-nums;
+  }
+
   </style>
 </head>
 <body>
@@ -681,7 +819,7 @@
   <div class="live-bar" role="button" tabindex="0" onclick="showView('mercado')" onkeypress="if(event.key==='Enter')showView('mercado')" title="Ver mercado &amp; presupuesto">
     <span class="lb-ic">🛒</span>
     <div class="lb-txt"><span class="lb-lbl">Presupuesto por persona</span><b id="barAdulto">—</b></div>
-    <span class="lb-sub">total <span id="barTotal">—</span> · ÷20 · en vivo</span>
+    <span class="lb-sub">total <span id="barTotal">—</span> · ÷18 · en vivo</span>
     <span class="lb-go">Ver ›</span>
   </div>
 
@@ -716,9 +854,9 @@
     </div>
 
     <div class="facts">
-      <div class="fact"><div class="k">Personas</div><div class="v">24</div><div class="u">20 adultos + 4 niños</div></div>
-      <div class="fact"><div class="k">Alojamiento</div><div class="v">$100<span class="u">k</span></div><div class="u">por persona</div></div>
-      <div class="fact"><div class="k">Mercado</div><div class="v" id="factAdulto">$75<span class="u">k</span></div><div class="u">por adulto (÷20)</div></div>
+      <div class="fact"><div class="k">Cupos</div><div class="v">18</div><div class="u">confirmados + 2 niñas</div></div>
+      <div class="fact"><div class="k">Alojamiento</div><div class="v">$111<span class="u">k</span></div><div class="u">pagado · ÷18</div></div>
+      <div class="fact"><div class="k">Mercado</div><div class="v" id="factAdulto">$87<span class="u">k</span></div><div class="u">presupuesto (÷18)</div></div>
       <div class="fact"><div class="k">Comidas</div><div class="v">7</div><div class="u">2 des · 3 alm · 2 cenas</div></div>
     </div>
   </header>
@@ -738,14 +876,17 @@
       <button type="button" class="hub-btn s-itin" onclick="showView('itinerario')">
         <span class="ic">📅</span><span><span class="tt">Itinerario</span><span class="ds">Bitácora de actividades, de la llegada a la salida</span></span><span class="go">›</span>
       </button>
+      <button type="button" class="hub-btn s-confirm" onclick="showView('confirmados')">
+        <span class="ic">✅</span><span><span class="tt">Confirmados &amp; cuota</span><span class="ds">Los 18 cupos: alojamiento pagado y presupuesto</span></span><span class="go">›</span>
+      </button>
       <button type="button" class="hub-btn s-logi" onclick="showView('logistica')">
         <span class="ic">🧭</span><span><span class="tt">Sugerencias</span><span class="ds">Plata, dónde comprar y consejos</span></span><span class="go">›</span>
       </button>
     </div>
     <footer>
     <span>Plan sugerido · <b>El Paseo 9</b> · Capitanejo, Santander</span>
-    <span>~24 raciones · gastos <b>÷ 20 que aportan</b> · ajustable</span>
-    <span class="ver">🕒 Versión desplegada: <b>8 de julio de 2026, 9:41 p.m.</b> (hora Colombia)</span>
+    <span>~22 raciones · gastos <b>÷ 18 que aportan</b> · ajustable</span>
+    <span class="ver">🕒 Versión desplegada: <b>9 de julio de 2026</b> (hora Colombia)</span>
   </footer>
   </div>
 
@@ -824,7 +965,7 @@
     <div class="sim-banner">🧪 <span><b>Simulación:</b> el menú y los costos son un estimado y <b>cambiarán según lo que la familia decida</b>.</span></div>
     <div class="how-note">🔄 <b>¿Cómo funciona?</b> Toca las opciones de cada comida 👇 y verás cómo <b>la lista de mercado y el presupuesto se recalculan solos</b> (el número de arriba hace un pulso cada vez que cambia). Nada es fijo: es para hacernos una idea.</div>
     <div class="plan-top plan-sticky">
-      <div class="plan-live">🛒 Mercado por adulto <b id="planAdulto">—</b><small>÷20 · EN VIVO · total <span id="planTotal">—</span></small></div>
+      <div class="plan-live">🛒 Mercado por persona <b id="planAdulto">—</b><small>÷18 · EN VIVO · total <span id="planTotal">—</span></small></div>
       <button type="button" class="btn-reset" onclick="Paseo.reset()">↺ Restaurar sugerido</button>
     </div>
     <div id="planner"></div>
@@ -848,7 +989,7 @@
       <div class="budget-hd">
         <span class="lbl">💵 Presupuesto del mercado</span>
         <span class="total"><span id="mTotal">—</span><small>total estimado</small></span>
-        <span class="total"><span id="mAdulto">—</span><small>por adulto (÷20)</small></span>
+        <span class="total"><span id="mAdulto">—</span><small>por persona (÷18)</small></span>
       </div>
       <div class="merc-toggle">
         <button type="button" class="mt active" data-tab="comida" onclick="Paseo.tab('comida')">🍽️ Por comida</button>
@@ -857,7 +998,7 @@
       <div class="budget-rows" id="mBreakdown"></div>
       <div id="shopList" style="display:none;"></div>
       <div class="budget-note">
-        👥 <b>Cómo se divide:</b> entre <b>20 que aportan</b> = todos los adultos + <b>Salomé y Joel</b> (adolescentes, cuentan juntos como 1 adulto). <b>Alanna, Luciana y Hanna</b> (1–2 años) no cuentan.<br><br>
+        👥 <b>Cómo se divide:</b> entre los <b>18 cupos confirmados</b>. <b>Luciana y Alanna</b> (niñas pequeñas) no pagan cuota. <a href="#" onclick="showView('confirmados');return false;" style="color:var(--sec); font-weight:700;">Ver lista de confirmados ›</a><br><br>
         📊 Estimado según la <b>canasta colombiana 2026</b> (DANE/SIPSA). Los valores varían por ciudad y almacén; comprando en <b>Cúcuta o central mayorista</b> el total baja. Aparte va el <b>alojamiento: $100.000/persona</b>.
       </div>
     </div>
@@ -924,20 +1065,20 @@
       <div class="route">
         <div class="rh"><span class="fl">🏙️</span><span class="rt">Desde Bogotá</span><span class="rk">~328 km · 6–7 h</span></div>
         <ol>
-          <li>Bogotá → <b>Tunja</b> → Duitama</li>
-          <li>Duitama → Santa Rosa de Viterbo → Belén</li>
-          <li>Belén → <b>Soatá</b> → Capitanejo <span style="color:var(--ink-soft)">(Troncal Central del Norte)</span></li>
-          <li>Capitanejo → la finca (junto a San José de Miranda)</li>
+          <li><span class="leg-row"><span class="leg-d">Bogotá → <b>Tunja</b> → Duitama</span><span class="leg-t">⏱ ~3 h 30</span></span></li>
+          <li><span class="leg-row"><span class="leg-d">Duitama → Santa Rosa de Viterbo → Belén</span><span class="leg-t">⏱ ~40 min</span></span></li>
+          <li><span class="leg-row"><span class="leg-d">Belén → <b>Soatá</b> → Capitanejo <span style="color:var(--ink-soft)">(Troncal Central del Norte)</span></span><span class="leg-t">⏱ ~2 h</span></span></li>
+          <li><span class="leg-row"><span class="leg-d">Capitanejo → la finca (junto a San José de Miranda)</span><span class="leg-t">⏱ ~10 min</span></span></li>
         </ol>
         <div class="rtip">⛽ Tanquear en Duitama o Soatá. Vía de montaña con curvas → salir temprano, con descanso.</div>
       </div>
       <div class="route">
         <div class="rh"><span class="fl">🌄</span><span class="rt">Desde Cúcuta</span><span class="rk">~5–6 h</span></div>
         <ol>
-          <li>Cúcuta → <b>Pamplona</b> (~1 h 20)</li>
-          <li>Pamplona → Chitagá → Cerrito → <b>Páramo del Almorzadero</b></li>
-          <li>→ Concepción → <b>Málaga</b> → San José de Miranda</li>
-          <li>→ Capitanejo → la finca</li>
+          <li><span class="leg-row"><span class="leg-d">Cúcuta → <b>Pamplona</b></span><span class="leg-t">⏱ ~1 h 20</span></span></li>
+          <li><span class="leg-row"><span class="leg-d">Pamplona → Chitagá → Cerrito → <b>Páramo del Almorzadero</b></span><span class="leg-t">⏱ ~1 h 40</span></span></li>
+          <li><span class="leg-row"><span class="leg-d">→ Concepción → <b>Málaga</b> → San José de Miranda</span><span class="leg-t">⏱ ~1 h 40</span></span></li>
+          <li><span class="leg-row"><span class="leg-d">→ Capitanejo → la finca</span><span class="leg-t">⏱ ~30 min</span></span></li>
         </ol>
         <div class="rtip">🥶 El Almorzadero es muy alto y frío (niebla/lluvia posible) → ropa abrigada y tanquear en Pamplona o Málaga.</div>
       </div>
@@ -990,6 +1131,30 @@
     <div class="callout">💡 <b>Tips:</b> repartir por turnos la cocina y el aseo (ver familias asignadas en el Planificador), hidratarse, usar bloqueador y repelente, y cuadrar los horarios de cocina para que nadie se recargue. Todo es <b>flexible</b> y ajustable el día del paseo. 🙂</div>
   </div>
 
+  <!-- ============ CONFIRMADOS & CUOTA ============ -->
+  <div id="view-confirmados" class="view s-confirm">
+    <div class="backbar"><button type="button" onclick="showView('home')">← Volver al inicio</button></div>
+    <div class="sec-head"><h2>✅ Confirmados &amp; cuota</h2></div>
+    <p class="sec-sub"><b>18 cupos confirmados</b>. El <b>alojamiento ya está pagado</b> por todos (valor real); el <b>mercado es solo un presupuesto</b> estimado que puede variar. 🤝</p>
+    <div class="conf-summary">
+      <div class="cs-block cs-paid">
+        <span class="cs-tag paid">✓ PAGADO · CONFIRMADO POR LOS 18</span>
+        <span class="cs-lbl">🏠 Alojamiento por persona</span>
+        <b class="cs-big" id="confLodgePP">—</b>
+        <span class="cs-sub">cuota <b>ya pagada</b> · total <span id="confLodgeTotal">—</span> ÷ 18 cupos</span>
+      </div>
+      <div class="cs-block cs-budget">
+        <span class="cs-tag est">◷ PENDIENTE · PRESUPUESTO POR RECAUDAR</span>
+        <span class="cs-lbl">🛒 Mercado por persona</span>
+        <b class="cs-big" id="confMarketPP">—</b>
+        <span class="cs-sub"><b>aún no recaudado</b> · estimado, puede variar · total <span id="confMarketTotal">—</span> ÷ 18</span>
+      </div>
+    </div>
+    <div class="conf-grand">👉 Por persona: <b class="cg-paid">✓ <span id="confLodgePP2">—</span></b> pagado (alojamiento) <b class="cg-pend">◷ <span id="confMarketPP2">—</span></b> pendiente (mercado) <span>· total aprox. <b id="confGrand">—</b>, el mismo para los 18. 🤝</span></div>
+    <div class="how-note">🔄 El <b>mercado</b> es dinámico: si en el <b>🍽️ Planificador</b> cambian un plato, su presupuesto se recalcula solo (÷18). El <b>alojamiento no cambia</b> — ya se pagó. <button type="button" class="btn-reset" style="margin-left:6px;" onclick="showView('menu')">Abrir Planificador</button></div>
+    <div id="confList"></div>
+  </div>
+
   <!-- ============ CÓMO ATACARLO ============ -->
   <div id="view-logistica" class="view s-logi">
     <div class="backbar"><button type="button" onclick="showView('home')">← Volver al inicio</button></div>
@@ -1000,7 +1165,7 @@
     <div class="logi">
       <div class="card accent">
         <h4>💰 Dos cajas separadas</h4>
-        <p>La <b>estadía</b> la maneja Alexis (llave <b>1001301376</b> · Paula L. Cacua) — tope de pago <b>9 de julio</b>. Para el <b>mercado</b> nombrar un tesorero aparte y dividir el total <b>entre 20</b> (adultos + Salomé y Joel que cuentan como 1; los bebés no cuentan).</p>
+        <p>La <b>estadía</b> la maneja Alexis (llave <b>1001301376</b> · Paula L. Cacua) — tope de pago <b>9 de julio</b>. Para el <b>mercado</b> nombrar un tesorero aparte y dividir el total <b>entre 18 cupos confirmados</b> (Luciana y Alanna no pagan cuota). El <b>alojamiento ($2.000.000 ÷ 18 = $111.111 c/u)</b> ya está pagado.</p>
       </div>
       <div class="card">
         <h4>🛒 Dónde comprar</h4>
@@ -1069,8 +1234,10 @@
 /* ============ Paseo 9 — App (tablero + planificador dinámico) ============ */
 (function(){
   "use strict";
-  var DIVISOR = 20;                // adultos + Salomé/Joel(1); bebés no cuentan
+  var DIVISOR = 18;                // 18 confirmados; niñas Luciana/Alanna no pagan cuota
   var TRANSVERSAL = 426000;        // compras transversales (fijo)
+  var LODGING_TOTAL = 2000000;     // alojamiento TOTAL: real y YA PAGADO (fijo). Se divide entre los cupos.
+  function lodgingPP(){ return LODGING_TOTAL/DIVISOR; }  // $2.000.000 ÷ 18 = $111.111 por persona
 
   function fmt(n){ return "$" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
   function fmtK(n){ return "$" + Math.round(n/1000) + "k"; }
@@ -1112,6 +1279,34 @@
   var DEFAULT_FAMS = {s1:[4,9], s2:[], s3:[], s4:[3,2], s5:[], s6:[], s7:[1,0]};
 
   var FAMILIES = ["Peralta Sánchez","Gómez Sánchez","Cendales Sánchez","Cendales Cacua","Cendales Contreras","Sánchez Yáñez","Daniela","Hans","Arantza","Rojas Sánchez"];
+
+  // Confirmados: 18 cupos que aportan (niñas Luciana/Alanna no pagan cuota)
+  // age: adult(~50) · young(20–30) · teen(adolescente) · senior(tercera edad).  g: m/f/duo (ícono)
+  var CONFIRMADOS = [
+    {n:"Alba Sánchez", age:"adult", g:"f"},{n:"Sandro Cendales", age:"adult", g:"m"},{n:"Daniela Cendales", age:"adult", g:"f"},
+    {n:"Élcida Rivera", age:"senior", g:"f"},{n:"Eloisa Delgado", age:"senior", g:"f"},
+    {n:"Sergio Cendales", age:"young", g:"m", nota:"papá de Luciana 👶"},{n:"Marcela Contreras", age:"young", g:"f"},
+    {n:"Alexis Cendales", age:"young", g:"m", nota:"papá de Alanna 👶"},{n:"Paula Cacua", age:"young", g:"f"},
+    {n:"Neyda Sánchez", age:"adult", g:"f"},{n:"Jimmy Rojas", age:"adult", g:"m"},
+    {n:"Joel y Salomé", age:"teen", g:"duo"},{n:"Oliver Peralta", age:"adult", g:"m"},
+    {n:"Mireya Sánchez", age:"adult", g:"f", bday:true},{n:"Hans Peralta", age:"young", g:"m"},
+    {n:"Arantza Peralta", age:"young", g:"f", nota:"dueña de Maylo 🐶"},{n:"Hugo Gómez", age:"adult", g:"m"},{n:"Rocío Sánchez", age:"adult", g:"f"}
+  ]; // 18
+  var AGES = {
+    adult:  {col:"#3f6f9e", lbl:"Adulto/a (~50)"},
+    young:  {col:"#2f9f97", lbl:"Joven (20–30)"},
+    teen:   {col:"#d98432", lbl:"Adolescentes"},
+    senior: {col:"#9068a8", lbl:"Tercera edad"}
+  };
+  function personSVG(g){
+    if(g==="duo") return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="7.6" cy="8.4" r="2.7"/><circle cx="16.4" cy="8.4" r="2.7"/><path d="M7.6 11.8c-2.5 0-4.5 1.7-4.5 4.2v1.6c0 .5.3.8.8.8h7.4c.5 0 .8-.3.8-.8v-1.6c0-2.5-2-4.2-4.5-4.2z"/><path d="M16.4 11.8c-2.5 0-4.5 1.7-4.5 4.2v1.6c0 .5.3.8.8.8h7.4c.5 0 .8-.3.8-.8v-1.6c0-2.5-2-4.2-4.5-4.2z"/></svg>';
+    if(g==="f") return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="6.6" r="3.4"/><path d="M12 10.6c-1.7 0-3.1.95-3.7 2.5l-2.1 5.5c-.3.8.2 1.5 1 1.5h9.6c.8 0 1.3-.7 1-1.5l-2.1-5.5c-.6-1.55-2-2.5-3.7-2.5z"/></svg>';
+    return '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="6.6" r="3.4"/><path d="M12 10.7c-3.5 0-6.3 2.3-6.3 5.7v2.2c0 .6.4 1 1 1h10.6c.6 0 1-.4 1-1v-2.2c0-3.4-2.8-5.7-6.3-5.7z"/></svg>';
+  }
+  var ICON_HOME = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2 2.5 11l1.3 1.6L5 11.6V20a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-8.4l1.2 1L21.5 11 12 3.2z"/></svg>';
+  var ICON_CART = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h2.2l.8 2H21l-2.6 8.2a2 2 0 0 1-1.9 1.4H9.1a2 2 0 0 1-1.9-1.4L4.3 5H3V3zm5.5 16a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6zm8 0a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6z"/></svg>';
+  var BEBES = [{n:"Luciana", de:"Sergio y Marcela"},{n:"Alanna", de:"Alexis y Paula"}];
+  var MASCOTAS = [{n:"Maylo", de:"Arantza"}];  // 🐶 la mascota del paseo
 
   var sel = {}, fams = {};
   function applyState(o){
@@ -1167,6 +1362,54 @@
     el.innerHTML = html;
   }
 
+  function statusBadges(){
+    return '<span class="cf-status">'
+      + '<span class="st st-paid" title="Cuota de alojamiento PAGADA (confirmada)">'+ICON_HOME+'<b class="stk">✓</b></span>'
+      + '<span class="st st-pend" title="Mercado PENDIENTE — presupuesto por recaudar">'+ICON_CART+'<b class="stk">◷</b></span>'
+      + '</span>';
+  }
+  function renderConfirmados(){
+    var el = document.getElementById("confList"); if(!el) return;
+    var cards = CONFIRMADOS.map(function(p, i){
+      var a = AGES[p.age] || AGES.adult;
+      var av = '<span class="cf-av" style="--acol:'+a.col+'"><span class="cf-ico">'+personSVG(p.g)+'</span><span class="cf-no">'+(i+1)+'</span></span>';
+      if(p.bday){
+        return '<div class="conf-card bday">'
+          + '<span class="bday-shine"></span>'
+          + av
+          + '<span class="cf-info">'
+          +   '<span class="bday-eyebrow">✦ Feliz cumpleaños ✦</span>'
+          +   '<span class="cf-name">'+esc(p.n)+'</span>'
+          +   '<span class="bday-sub">celebramos sus <b>53</b> · alojamiento pagado ✓</span>'
+          + '</span>'
+          + '<span class="bday-age"><b>53</b><small>años 🎂</small></span>'
+          + '</div>';
+      }
+      return '<div class="conf-card">'
+        + av
+        + '<span class="cf-info"><span class="cf-name">'+esc(p.n)+'</span>'
+        +   '<span class="cf-meta"><span class="cf-cat" style="--acol:'+a.col+'">'+a.lbl+'</span>'
+        +   (p.nota? '<span class="cf-nota">'+esc(p.nota)+'</span>':'')+'</span>'
+        + '</span>'
+        + statusBadges()
+        + '</div>';
+    }).join("");
+    var babies = BEBES.map(function(b){
+      return '<span class="baby-chip">👶 <b>'+esc(b.n)+'</b> · hija de '+esc(b.de)+' <em>(sin cuota)</em></span>';
+    }).join("");
+    var pets = MASCOTAS.map(function(m){
+      return '<span class="baby-chip pet">🐶 <b>'+esc(m.n)+'</b> · perrito de '+esc(m.de)+' <em>(la mascota 🐾)</em></span>';
+    }).join("");
+    el.innerHTML = '<div class="conf-rosterhd"><span class="cb-lbl">👥 Los 18 cupos confirmados</span></div>'
+      + '<div class="conf-statuslegend">'
+      +   '<span class="sl-item"><span class="st st-paid mini">'+ICON_HOME+'<b class="stk">✓</b></span> Alojamiento <b>pagado</b> (confirmado)</span>'
+      +   '<span class="sl-item"><span class="st st-pend mini">'+ICON_CART+'<b class="stk">◷</b></span> Mercado <b>pendiente</b> (presupuesto por recaudar)</span>'
+      + '</div>'
+      + '<div class="conf-agelegend"><span class="ag-dot" style="--acol:'+AGES.teen.col+'"></span>Adolescente <span class="ag-dot" style="--acol:'+AGES.young.col+'"></span>Joven (20–30) <span class="ag-dot" style="--acol:'+AGES.adult.col+'"></span>Adulto (~50) <span class="ag-dot" style="--acol:'+AGES.senior.col+'"></span>Tercera edad</div>'
+      + '<div class="conf-grid">'+cards+'</div>'
+      + '<div class="conf-babies"><span class="cb-lbl">👶🐾 Acompañantes que no pagan cuota:</span>'+babies+pets+'</div>';
+  }
+
   function catOf(name){
     var n = name.toLowerCase();
     if(/pollo|res|carne|chorizo|butifarra|gallina|costilla|huevo|tocineta|pescado|cachama|salchicha|jam|salami|morcilla/.test(n)) return "prot";
@@ -1218,6 +1461,14 @@
     var pt=document.getElementById("planTotal"); if(pt) pt.textContent=fmt(total());
     var ba=document.getElementById("barAdulto"); if(ba) ba.textContent=fmt(perAdulto());
     var bt=document.getElementById("barTotal"); if(bt) bt.textContent=fmt(total());
+    var lpp=lodgingPP();
+    var cmp=document.getElementById("confMarketPP"); if(cmp) cmp.textContent=fmt(perAdulto());
+    var cmt=document.getElementById("confMarketTotal"); if(cmt) cmt.textContent=fmt(total());
+    var clp=document.getElementById("confLodgePP"); if(clp) clp.textContent=fmt(lpp);
+    var clt=document.getElementById("confLodgeTotal"); if(clt) clt.textContent=fmt(LODGING_TOTAL);
+    var cg=document.getElementById("confGrand"); if(cg) cg.textContent=fmt(perAdulto()+lpp);
+    var clp2=document.getElementById("confLodgePP2"); if(clp2) clp2.textContent=fmt(lpp);
+    var cmp2=document.getElementById("confMarketPP2"); if(cmp2) cmp2.textContent=fmt(perAdulto());
     renderMercado();
   }
 
@@ -1243,7 +1494,8 @@
       }).join("\n");
       var msg="🏞️ *Reencuentro Familiar · Paseo 9* (18–20 jul · Capitanejo)\n\n"
         +"*Propuesta de menú y quién prepara:*\n"+lines+"\n\n"
-        +"💰 Mercado estimado: total "+fmt(total())+" · *"+fmt(perAdulto())+" por persona* (÷20)\n\n"
+        +"🏠 Alojamiento (ya pagado): *"+fmt(lodgingPP())+" por persona* (total "+fmt(LODGING_TOTAL)+" ÷ 18)\n"
+        +"🛒 Mercado (presupuesto estimado, puede variar): total "+fmt(total())+" · *"+fmt(perAdulto())+" por persona* (÷18)\n\n"
         +"👉 Abre la MISMA selección aquí:\n"+link+"\n\n"
         +"_Es una simulación 🙏 se puede cambiar entre todos._";
       window.open("https://wa.me/?text="+encodeURIComponent(msg), "_blank");
@@ -1268,7 +1520,7 @@
     var shared=decodeCfg();
     if(shared){ applyState(shared); save(); var b=document.getElementById("sharedBanner"); if(b) b.style.display="flex"; }
     else { load(); }
-    renderPlanner(); recalc(); Paseo.show("home");
+    renderPlanner(); renderConfirmados(); recalc(); Paseo.show("home");
   }
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", init); } else { init(); }
 })();
