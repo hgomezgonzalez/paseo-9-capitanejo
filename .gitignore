@@ -2,5 +2,6 @@
 # Todo lo demás (capturas y transcript privados de WhatsApp, temporales) queda fuera.
 *
 !index.html
+!version.json
 !README.md
 !.gitignore
