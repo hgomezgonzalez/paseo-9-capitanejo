@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Reencuentro Familiar - Paseo 9 (Capitanejo): simulador de menu, mercado, acomodacion y como llegar.">
 <meta http-equiv="Cache-Control" content="no-cache">
-<script>window.__BUILD__="20260715-142347";</script>
+<script>window.__BUILD__="20260715-143120";</script>
 <script>(function(){try{var B=window.__BUILD__||"0";fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.v&&String(d.v)!==String(B)){var k="pz_reload_"+d.v;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.replace(location.pathname+"?v="+encodeURIComponent(d.v)+location.hash);}}}).catch(function(){});}catch(e){}})();</script>
 <title>Reencuentro Familiar · Paseo 9 (Capitanejo)</title>
 <style>
@@ -1325,7 +1325,7 @@ var FOODIMG = {
     {id:"s6", dia:"Lunes 20", mom:"Desayuno",            opts:["calentado","caldo","caldohuevo","huevosarepa"]},
     {id:"s7", dia:"Lunes 20", mom:"Almuerzo (despedida)", opts:["sancocho","arrozmixto","lengua","pescadofrito","arepasrell"]}
   ];
-  var DEFAULTS = {s1:"cachamas", s2:"perros", s3:"tamales", s4:"asado", s5:"pasabocas", s6:"caldohuevo", s7:"arrozmixto"};
+  var DEFAULTS = {s1:"cachamas", s2:"hambcombo", s3:"tamales", s4:"lengua", s5:"pasabocas", s6:"caldohuevo", s7:"arrozmixto"};
   var DEFAULT_FAMS = {s1:[4,9], s2:[], s3:[], s4:[3,2], s5:[], s6:[], s7:[1,0]};
 
   var FAMILIES = ["Peralta Sánchez","Gómez Sánchez","Cendales Sánchez","Cendales Cacua","Cendales Contreras","Sánchez Yáñez","Daniela","Hans","Arantza","Rojas Sánchez"];
@@ -1368,10 +1368,10 @@ var FOODIMG = {
     });
   }
   function load(){
-    try{ var raw=localStorage.getItem("paseo9-menu-v3"); if(raw){ applyState(JSON.parse(raw)); return; } }catch(e){}
+    try{ var raw=localStorage.getItem("paseo9-menu-v4"); if(raw){ applyState(JSON.parse(raw)); return; } }catch(e){}
     applyState(null);
   }
-  function save(){ try{ localStorage.setItem("paseo9-menu-v3", JSON.stringify({sel:sel, fams:fams})); }catch(e){} }
+  function save(){ try{ localStorage.setItem("paseo9-menu-v4", JSON.stringify({sel:sel, fams:fams})); }catch(e){} }
   function decodeCfg(){
     try{
       var m=(location.hash||"").match(/[#&]c=([^&]+)/);
