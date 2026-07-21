@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Reencuentro Familiar - Paseo 9 (Capitanejo): simulador de menu, mercado, acomodacion y como llegar.">
 <meta http-equiv="Cache-Control" content="no-cache">
-<script>window.__BUILD__="20260721-105623";</script>
+<script>window.__BUILD__="20260721-111132";</script>
 <script>(function(){try{var B=window.__BUILD__||"0";fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.v&&String(d.v)!==String(B)){var k="pz_reload_"+d.v;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.replace(location.pathname+"?v="+encodeURIComponent(d.v)+location.hash);}}}).catch(function(){});}catch(e){}})();</script>
 <title>Reencuentro Familiar · Paseo 9 (Capitanejo)</title>
 <style>
@@ -1882,12 +1882,12 @@ window.CUENTAS = (function(){
     {id:"elcida", n:"Élcida", ap:"Rivera", f:"cs", cons:-69768},
   ];
   var FAMILIAS = {
-    cs:  {n:"Cendales Sánchez",   e:"🏠", c:"#0E8C86"},
-    gs:  {n:"Gómez Sánchez",      e:"🏡", c:"#D8761A"},
-    ps:  {n:"Peralta Sánchez",    e:"🏘️", c:"#2f86b4"},
-    rs:  {n:"Rojas Sánchez",      e:"🏚️", c:"#5C7C33"},
-    cc:  {n:"Cendales Cacua",     e:"🏛️", c:"#8a68a8"},
-    cco: {n:"Cendales Contreras", e:"🏯", c:"#c9971f"}
+    cs:  {n:"Cendales Sánchez",   e:"🏠", c:"#0E8C86", repid:"sandro"},
+    gs:  {n:"Gómez Sánchez",      e:"🏡", c:"#D8761A", repid:"hugo"},
+    ps:  {n:"Peralta Sánchez",    e:"🏘️", c:"#2f86b4", repid:"hans"},
+    rs:  {n:"Rojas Sánchez",      e:"🏚️", c:"#5C7C33", repid:"jimmy"},
+    cc:  {n:"Cendales Cacua",     e:"🏛️", c:"#8a68a8", repid:"alexis"},
+    cco: {n:"Cendales Contreras", e:"🏯", c:"#c9971f", repid:"sergio"}
   };
   return {GASTOS:GASTOS, PARTES:PARTES, PERSONAS:PERSONAS, FAMILIAS:FAMILIAS, TESORERA:"rochy", RESIDUO:2};
 })();
@@ -1989,16 +1989,19 @@ window.CUENTAS = (function(){
 
   function tarjetaYo(id){
     var x = P[id], f = C.FAMILIAS[x.f], debe = x.cons < 0;
+    var esRep = (x.id === f.repid), rep = P[f.repid];
     var h = '<div class="cta-me-card ' + (debe ? 'pay' : 'get') + '">'
       + '<div class="mc-top"><span class="mc-fam"><span class="cta-ic">' + f.e + '</span>' + esc(f.n) + '</span>'
       + '<h3>' + esc(nombre(x)) + '</h3></div>'
       + '<div class="mc-big"><span class="mc-lbl">'
-      + (debe ? 'Debes pasarle a tu familia'
-              : (x.id === TESO ? 'Te queda a favor (lo recoges tú)' : 'Rochy te devuelve')) + '</span>'
+      + (esRep ? 'Tú eres el representante'
+               : (debe ? 'Le pasas a tu representante'
+                       : (x.id === TESO ? 'Te queda a favor (lo recoges tú)' : 'Rochy te devuelve'))) + '</span>'
       + '<b>' + fmtP(Math.abs(x.cons)) + '</b>' + exacto(x) + '</div>'
       + '<div class="mc-eq"><span>Pusiste <b>' + fmtC(x.paid) + '</b></span><span class="op">−</span>'
       + '<span>Te corresponde <b>' + fmtC(x.share) + '</b></span></div>';
-    if(debe) h += '<p class="cta-nota"><span class="cta-ic">👉</span>Pásale tu parte al <b>representante de tu familia ' + esc(f.n) + '</b> ' + f.e + ', y él o ella le <b>consigna el total a Rochy Sánchez</b>. Así tu familia hace una sola transferencia.</p>';
+    if(esRep) h += '<p class="cta-nota"><span class="cta-ic">🧮</span>Eres el <b>representante de la familia ' + esc(f.n) + '</b> ' + f.e + '. Reúne la parte de los tuyos y <b>cuadra el total del grupo con Rochy Sánchez</b> (le consignas, o recibes de ella, según el neto de tu familia).</p>';
+    else if(debe) h += '<p class="cta-nota"><span class="cta-ic">👉</span>Pásale tu parte al representante de tu familia <b>' + esc(f.n) + '</b> ' + f.e + ': <b>' + esc(rep.n + ' ' + rep.ap) + '</b>. Él o ella se encarga de <b>cuadrar el total con Rochy Sánchez</b>. Así tu familia hace una sola transferencia.</p>';
     if(x.nota) h += '<p class="cta-nota"><span class="cta-ic">ℹ️</span>' + esc(x.nota) + '</p>';
     h += '<div class="mc-acts">'
       + '<button type="button" class="cta-btn" onclick="Cuentas.detalle(\'' + x.id + '\')"><span class="cta-ic">🧾</span>Ver mi detalle gasto por gasto</button>'
@@ -2031,15 +2034,16 @@ window.CUENTAS = (function(){
       d.innerHTML = d.innerHTML ? "" : lineas(id);
     },
     wa: function(id){
-      var x = P[id], f = C.FAMILIAS[x.f], debe = x.cons < 0;
+      var x = P[id], f = C.FAMILIAS[x.f], debe = x.cons < 0, esRep = (x.id === f.repid), rep = P[f.repid];
       var msg = "🧾 *Cuentas finales · Paseo 9 Capitanejo* (18–20 jul 2026)\n\n"
         + "*" + nombre(x) + "*\n"
         + "• Pusiste: " + fmtC(x.paid) + "\n"
         + "• Te corresponde: " + fmtC(x.share) + "\n"
         + "• Saldo exacto (Splitwise): " + fmtC(Math.abs(x.net)) + "\n"
-        + (debe ? "👉 *Pásale " + fmtP(-x.cons) + "* al representante de tu familia " + f.n + " para que le consigne a Rochy Sánchez."
-                : (x.id === TESO ? "👉 *Te quedan " + fmtP(x.cons) + "* de lo que recaudes."
-                                 : "👉 *Rochy te devuelve " + fmtP(x.cons) + "*.")) + "\n\n"
+        + (esRep ? "👉 Eres el *representante de la familia " + f.n + "*: reúne la parte de los tuyos y cuadra el total con Rochy Sánchez."
+                : (debe ? "👉 *Pásale " + fmtP(-x.cons) + "* al representante de tu familia " + f.n + ": " + rep.n + " " + rep.ap + ", que cuadra el total con Rochy Sánchez."
+                        : (x.id === TESO ? "👉 *Te quedan " + fmtP(x.cons) + "* de lo que recaudes."
+                                         : "👉 *Rochy te devuelve " + fmtP(x.cons) + "*."))) + "\n\n"
         + "Gasto total del paseo: " + fmtC(TOTAL) + " entre " + PER.length + " personas.";
       window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
     }
@@ -2104,7 +2108,10 @@ window.CUENTAS = (function(){
 
     h += '<div class="cta-block"><h3 class="cta-h"><span class="cta-ic">🏦</span>Cómo se paga: vía el representante de cada familia</h3>'
        + '<p class="cta-p"><b>Rochy Sánchez</b> es la <b>delegada centradora de costos</b> (la tesorera de la familia). '
-       + 'Cada quien le pasa su parte al <b>representante de su familia</b> — Gómez Sánchez, Peralta Sánchez, Cendales Sánchez, Rojas Sánchez, Cendales Cacua o Cendales Contreras — y ese representante le <b>consigna el total a Rochy</b>. Ella le devuelve a las familias que pusieron de más. Así cada familia hace <b>una sola transferencia</b> y nadie hace 10 distintas.</p>'
+       + 'Cada quien le pasa su parte al <b>representante de su familia</b>, y ese representante <b>cuadra el total con Rochy</b>. Ella le devuelve a las familias que pusieron de más. Así cada familia hace <b>una sola transferencia</b> y nadie hace 10 distintas.</p>'
+       + '<p class="cta-p" style="margin-top:6px"><b>Representante de cada familia:</b><br>'
+       + FAM.map(function(fm){ var r = P[C.FAMILIAS[fm.k].repid]; return fm.e + ' <b>' + esc(fm.n) + '</b> → ' + esc(r.n + ' ' + r.ap); }).join('<br>')
+       + '</p>'
        + '<div class="cta-flow">';
     h += '<div class="cta-col in"><div class="cf-hd"><span class="cta-ic">⬅️</span>Le consignan a Rochy</div><ul>';
     DEUDORES.forEach(function(x){
