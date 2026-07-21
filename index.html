@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Reencuentro Familiar - Paseo 9 (Capitanejo): simulador de menu, mercado, acomodacion y como llegar.">
 <meta http-equiv="Cache-Control" content="no-cache">
-<script>window.__BUILD__="20260721-104927";</script>
+<script>window.__BUILD__="20260721-105623";</script>
 <script>(function(){try{var B=window.__BUILD__||"0";fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.v&&String(d.v)!==String(B)){var k="pz_reload_"+d.v;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.replace(location.pathname+"?v="+encodeURIComponent(d.v)+location.hash);}}}).catch(function(){});}catch(e){}})();</script>
 <title>Reencuentro Familiar · Paseo 9 (Capitanejo)</title>
 <style>
@@ -1993,11 +1993,12 @@ window.CUENTAS = (function(){
       + '<div class="mc-top"><span class="mc-fam"><span class="cta-ic">' + f.e + '</span>' + esc(f.n) + '</span>'
       + '<h3>' + esc(nombre(x)) + '</h3></div>'
       + '<div class="mc-big"><span class="mc-lbl">'
-      + (debe ? 'Debes consignar a Rochy'
+      + (debe ? 'Debes pasarle a tu familia'
               : (x.id === TESO ? 'Te queda a favor (lo recoges tú)' : 'Rochy te devuelve')) + '</span>'
       + '<b>' + fmtP(Math.abs(x.cons)) + '</b>' + exacto(x) + '</div>'
       + '<div class="mc-eq"><span>Pusiste <b>' + fmtC(x.paid) + '</b></span><span class="op">−</span>'
       + '<span>Te corresponde <b>' + fmtC(x.share) + '</b></span></div>';
+    if(debe) h += '<p class="cta-nota"><span class="cta-ic">👉</span>Pásale tu parte al <b>representante de tu familia ' + esc(f.n) + '</b> ' + f.e + ', y él o ella le <b>consigna el total a Rochy Sánchez</b>. Así tu familia hace una sola transferencia.</p>';
     if(x.nota) h += '<p class="cta-nota"><span class="cta-ic">ℹ️</span>' + esc(x.nota) + '</p>';
     h += '<div class="mc-acts">'
       + '<button type="button" class="cta-btn" onclick="Cuentas.detalle(\'' + x.id + '\')"><span class="cta-ic">🧾</span>Ver mi detalle gasto por gasto</button>'
@@ -2030,13 +2031,13 @@ window.CUENTAS = (function(){
       d.innerHTML = d.innerHTML ? "" : lineas(id);
     },
     wa: function(id){
-      var x = P[id], debe = x.cons < 0;
+      var x = P[id], f = C.FAMILIAS[x.f], debe = x.cons < 0;
       var msg = "🧾 *Cuentas finales · Paseo 9 Capitanejo* (18–20 jul 2026)\n\n"
         + "*" + nombre(x) + "*\n"
         + "• Pusiste: " + fmtC(x.paid) + "\n"
         + "• Te corresponde: " + fmtC(x.share) + "\n"
         + "• Saldo exacto (Splitwise): " + fmtC(Math.abs(x.net)) + "\n"
-        + (debe ? "👉 *Consigna " + fmtP(-x.cons) + "* a Rochy Sánchez (centro de costos)."
+        + (debe ? "👉 *Pásale " + fmtP(-x.cons) + "* al representante de tu familia " + f.n + " para que le consigne a Rochy Sánchez."
                 : (x.id === TESO ? "👉 *Te quedan " + fmtP(x.cons) + "* de lo que recaudes."
                                  : "👉 *Rochy te devuelve " + fmtP(x.cons) + "*.")) + "\n\n"
         + "Gasto total del paseo: " + fmtC(TOTAL) + " entre " + PER.length + " personas.";
@@ -2068,7 +2069,7 @@ window.CUENTAS = (function(){
     h += '<div class="cta-block"><h3 class="cta-h"><span class="cta-ic">👨‍👩‍👧‍👦</span>Tablero por familia</h3>'
        + '<p class="cta-p">Saldo neto de cada familia. Toca una tarjeta para ver a sus integrantes, '
        + 'y toca un integrante para ver su detalle gasto por gasto. '
-       + '<b>Cada persona liquida por separado</b> con Rochy — el total familiar es solo para ubicarse.</p>'
+       + '<b>Cada quien le pasa su parte al representante de su familia</b>, y el representante le consigna el total a Rochy. Así cada familia hace una sola transferencia.</p>'
        + '<div class="cta-fams">';
     FAM.forEach(function(f){
       var debe = f.cons < 0, pid = "fam-" + f.k;
@@ -2101,9 +2102,9 @@ window.CUENTAS = (function(){
     });
     h += '</div></div>';
 
-    h += '<div class="cta-block"><h3 class="cta-h"><span class="cta-ic">🏦</span>Todo se consigna a Rochy</h3>'
-       + '<p class="cta-p"><b>Rochy Sánchez</b> es la <b>delegada centradora de costos</b> (la contadora de la familia). '
-       + 'Quien deba, le consigna a ella; ella le devuelve a quien puso de más. Así nadie hace 10 transferencias distintas.</p>'
+    h += '<div class="cta-block"><h3 class="cta-h"><span class="cta-ic">🏦</span>Cómo se paga: vía el representante de cada familia</h3>'
+       + '<p class="cta-p"><b>Rochy Sánchez</b> es la <b>delegada centradora de costos</b> (la tesorera de la familia). '
+       + 'Cada quien le pasa su parte al <b>representante de su familia</b> — Gómez Sánchez, Peralta Sánchez, Cendales Sánchez, Rojas Sánchez, Cendales Cacua o Cendales Contreras — y ese representante le <b>consigna el total a Rochy</b>. Ella le devuelve a las familias que pusieron de más. Así cada familia hace <b>una sola transferencia</b> y nadie hace 10 distintas.</p>'
        + '<div class="cta-flow">';
     h += '<div class="cta-col in"><div class="cf-hd"><span class="cta-ic">⬅️</span>Le consignan a Rochy</div><ul>';
     DEUDORES.forEach(function(x){
