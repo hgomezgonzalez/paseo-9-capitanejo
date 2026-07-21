@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Reencuentro Familiar - Paseo 9 (Capitanejo): simulador de menu, mercado, acomodacion y como llegar.">
 <meta http-equiv="Cache-Control" content="no-cache">
-<script>window.__BUILD__="20260715-143843";</script>
+<script>window.__BUILD__="20260721-102918";</script>
 <script>(function(){try{var B=window.__BUILD__||"0";fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json();}).then(function(d){if(d&&d.v&&String(d.v)!==String(B)){var k="pz_reload_"+d.v;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.replace(location.pathname+"?v="+encodeURIComponent(d.v)+location.hash);}}}).catch(function(){});}catch(e){}})();</script>
 <title>Reencuentro Familiar · Paseo 9 (Capitanejo)</title>
 <style>
@@ -821,7 +821,195 @@
   .mg-dish{display:block; font-size:.82rem; font-weight:800; color:var(--ink); line-height:1.2;}
   .mg-credit{margin:10px 2px 0; font-size:.74rem; color:var(--ink-soft); font-style:italic;}
 
-  </style>
+  
+/* CUENTAS:START */
+  /* ================= Cuentas finales (liquidación) ================= */
+  .view.s-cuentas{--sec:#b0453a; --secbg:rgba(176,69,58,.14);}
+  .hub-btn.s-cuentas{--sec:#b0453a; --secbg:rgba(176,69,58,.14);}
+  .s-cuentas{--pay:#b0453a; --paybg:rgba(176,69,58,.12); --payln:rgba(176,69,58,.35);
+             --get:#2c7a52; --getbg:rgba(44,122,82,.12); --getln:rgba(44,122,82,.35);}
+  @media (prefers-color-scheme: dark){
+    .s-cuentas{--pay:#f08a7a; --paybg:rgba(240,138,122,.14); --payln:rgba(240,138,122,.34);
+               --get:#6fc496; --getbg:rgba(111,196,150,.14); --getln:rgba(111,196,150,.34);}
+    .view.s-cuentas{--sec:#f08a7a; --secbg:rgba(240,138,122,.14);}
+    .hub-btn.s-cuentas{--sec:#f08a7a; --secbg:rgba(240,138,122,.14);}
+  }
+  :root[data-theme="dark"] .s-cuentas{--pay:#f08a7a; --paybg:rgba(240,138,122,.14); --payln:rgba(240,138,122,.34);
+             --get:#6fc496; --getbg:rgba(111,196,150,.14); --getln:rgba(111,196,150,.34);}
+  :root[data-theme="light"] .s-cuentas{--pay:#b0453a; --paybg:rgba(176,69,58,.12); --payln:rgba(176,69,58,.35);
+             --get:#2c7a52; --getbg:rgba(44,122,82,.12); --getln:rgba(44,122,82,.35);}
+
+  /* respaldo por CSS si el navegador soporta :has() */
+  .wrap:has(#view-cuentas.active) .live-bar{display:none;}
+
+  .cta-ic{margin-right:.45em;}
+
+  /* --- cifras grandes --- */
+  .cta-stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(138px,1fr)); gap:12px; margin:18px 0 26px;}
+  .cta-stat{background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow);
+    padding:16px 14px; text-align:center;}
+  .cta-stat .cs-e{display:block; font-size:1.4rem; line-height:1;}
+  .cta-stat b{display:block; font-size:clamp(1.02rem, 4.1vw, 1.45rem); font-weight:900; letter-spacing:-.02em;
+    margin:8px 0 2px; font-variant-numeric:tabular-nums; overflow-wrap:anywhere;}
+  .cta-stat span:last-child{display:block; font-size:.8rem; color:var(--ink-soft);}
+
+  .cta-block{margin:0 0 34px;}
+  .cta-h{font-size:1.15rem; font-weight:900; letter-spacing:-.01em; margin:0 0 4px;}
+  .cta-p{font-size:.9rem; color:var(--ink-soft); margin:0 0 14px; line-height:1.5;}
+
+  /* --- selector "¿yo cuánto?" --- */
+  .cta-chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .cta-chip{font-family:inherit; cursor:pointer; font-weight:800; font-size:.86rem; padding:8px 14px;
+    border-radius:999px; background:var(--surface); color:var(--ink); border:1px solid var(--line);
+    box-shadow:var(--shadow); transition:transform .12s, border-color .12s, background .12s;}
+  .cta-chip:hover{transform:translateY(-1px);}
+  .cta-chip.pay:hover,.cta-chip.pay.on{border-color:var(--payln); background:var(--paybg); color:var(--pay);}
+  .cta-chip.get:hover,.cta-chip.get.on{border-color:var(--getln); background:var(--getbg); color:var(--get);}
+  .cta-chip.on{box-shadow:0 0 0 2px currentColor inset;}
+  .cta-chip:focus-visible{outline:2px solid var(--sec); outline-offset:2px;}
+
+  .cta-me-card{border-radius:20px; padding:22px; border:1px solid var(--line); background:var(--surface);
+    box-shadow:var(--shadow); animation:viewIn .22s ease both;}
+  .cta-me-card.pay{border-color:var(--payln); background:linear-gradient(var(--paybg),var(--paybg)) , var(--surface);}
+  .cta-me-card.get{border-color:var(--getln); background:linear-gradient(var(--getbg),var(--getbg)) , var(--surface);}
+  .mc-fam{font-size:.78rem; font-weight:800; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;}
+  .mc-top h3{margin:4px 0 0; font-size:1.3rem; font-weight:900; letter-spacing:-.02em;}
+  .mc-big{margin:16px 0 12px;}
+  .mc-lbl{display:block; font-size:.9rem; font-weight:800; color:var(--ink-soft);}
+  .mc-big > b{display:block; font-size:2.4rem; font-weight:900; letter-spacing:-.03em; line-height:1.1;
+    font-variant-numeric:tabular-nums;}
+  .cta-me-card.pay .mc-big > b{color:var(--pay);}
+  .cta-me-card.get .mc-big > b{color:var(--get);}
+  .mc-eq{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:.88rem; color:var(--ink-soft);
+    padding-top:12px; border-top:1px dashed var(--line);}
+  .mc-eq b{color:var(--ink); font-variant-numeric:tabular-nums;}
+  .mc-eq .op{font-weight:900; color:var(--ink-soft);}
+  .mc-acts{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .cta-btn{font-family:inherit; cursor:pointer; font-weight:800; font-size:.85rem; padding:10px 16px;
+    border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink); box-shadow:var(--shadow);}
+  .cta-btn:hover{border-color:var(--sec); color:var(--sec);}
+  .cta-btn.wa{background:#25D366; color:#06331a; border-color:transparent;}
+  .cta-btn.wa:hover{filter:brightness(1.05); color:#06331a;}
+  .cta-btn:focus-visible{outline:2px solid var(--sec); outline-offset:2px;}
+  .mc-det:not(:empty){margin-top:16px;}
+
+  /* --- badges --- */
+  .cta-badge{display:inline-block; font-size:.68rem; font-weight:900; text-transform:uppercase; letter-spacing:.04em;
+    padding:3px 8px; border-radius:999px; white-space:nowrap;}
+  .cta-badge.pay{background:var(--paybg); color:var(--pay); box-shadow:inset 0 0 0 1px var(--payln);}
+  .cta-badge.get{background:var(--getbg); color:var(--get); box-shadow:inset 0 0 0 1px var(--getln);}
+  .cta-badge.nil{background:var(--surface-2); color:var(--ink-soft); box-shadow:inset 0 0 0 1px var(--line);}
+
+  /* --- tarjetas de familia --- */
+  .cta-fams{display:flex; flex-direction:column; gap:12px;}
+  .cta-fam{border:1px solid var(--line); border-radius:18px; background:var(--surface); box-shadow:var(--shadow);
+    overflow:hidden; border-left:5px solid var(--fc,var(--sec));}
+  .cta-fam-hd{width:100%; font-family:inherit; cursor:pointer; text-align:left; background:none; border:0;
+    display:flex; align-items:center; gap:13px; padding:16px 18px; color:var(--ink);}
+  .cta-fam-hd:hover{background:var(--surface-2);}
+  .cta-fam-hd:focus-visible{outline:2px solid var(--sec); outline-offset:-3px;}
+  .fh-e{font-size:1.5rem; flex:0 0 auto;}
+  .fh-txt{flex:1 1 auto; min-width:0;}
+  .fh-n{display:block; font-weight:900; font-size:1.02rem; letter-spacing:-.01em;}
+  .fh-m{display:block; font-size:.78rem; color:var(--ink-soft); margin-top:2px;}
+  .fh-amt{flex:0 0 auto; text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:4px;}
+  .fh-amt b{font-size:1.18rem; font-weight:900; letter-spacing:-.02em; font-variant-numeric:tabular-nums;}
+  .cta-fam.pay .fh-amt b{color:var(--pay);}
+  .cta-fam.get .fh-amt b{color:var(--get);}
+  .fh-go{flex:0 0 auto; color:var(--ink-soft); font-size:1rem; transition:transform .2s;}
+  .cta-fam-hd.open .fh-go,.cta-per-hd.open .fh-go{transform:rotate(180deg);}
+
+  .cta-fam-bd,.cta-per-bd{display:none; padding:0 18px 18px;}
+  .cta-fam-bd.open,.cta-per-bd.open{display:block; animation:viewIn .22s ease both;}
+  .cta-per-bd{padding:0 0 14px;}
+
+  /* ecuación puso − corresponde = saldo */
+  .cta-eq{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:.85rem; color:var(--ink-soft);
+    background:var(--surface-2); border-radius:12px; padding:12px 14px; margin:4px 0 14px;}
+  .cta-eq b{color:var(--ink); font-variant-numeric:tabular-nums;}
+  .cta-eq .op{font-weight:900;}
+  .cta-eq .res{font-weight:800; margin-left:auto; white-space:nowrap;}
+  .cta-eq.pay .res,.cta-eq.pay .res b{color:var(--pay);}
+  .cta-eq.get .res,.cta-eq.get .res b{color:var(--get);}
+
+  /* --- integrantes --- */
+  .cta-mem{display:flex; flex-direction:column; gap:8px;}
+  .cta-per{border:1px solid var(--line); border-radius:13px; background:var(--paper); overflow:hidden;}
+  .cta-per-hd{width:100%; font-family:inherit; cursor:pointer; text-align:left; background:none; border:0;
+    display:flex; align-items:center; gap:10px; padding:12px 14px; color:var(--ink);}
+  .cta-per-hd:hover{background:var(--surface-2);}
+  .cta-per-hd:focus-visible{outline:2px solid var(--sec); outline-offset:-3px;}
+  .ph-n{flex:1 1 auto; font-weight:800; font-size:.93rem; min-width:0; overflow-wrap:anywhere;}
+  .ph-amt{flex:0 0 auto; display:flex; align-items:center; gap:8px;}
+  .ph-amt b{font-size:1rem; font-weight:900; font-variant-numeric:tabular-nums;}
+  .cta-per.pay .ph-amt b{color:var(--pay);}
+  .cta-per.get .ph-amt b{color:var(--get);}
+
+  /* --- tabla de detalle --- */
+  .cta-lines{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 14px;}
+  .cta-lines table{width:100%; min-width:430px; border-collapse:collapse; font-size:.82rem;}
+  .cta-lines th{text-align:left; font-size:.7rem; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--ink-soft); padding:8px 8px; border-bottom:1px solid var(--line); white-space:nowrap;}
+  .cta-lines td{padding:9px 8px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .cta-lines .num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .cta-lines tr.mine{background:var(--getbg);}
+  .cta-lines td.pos{color:var(--get); font-weight:800;}
+  .cta-lines td.zero,.cta-lines td.out{color:var(--ink-soft);}
+  .lg-e{margin-right:6px;}
+  .lg-n{font-weight:700;}
+  .lg-d{display:block; font-size:.72rem; color:var(--ink-soft); margin-top:2px;}
+  .cta-lines tfoot td{font-weight:900; border-bottom:0; border-top:2px solid var(--line); padding-top:10px;}
+  .cta-nota{font-size:.8rem; color:var(--ink-soft); margin:10px 14px 0; line-height:1.45;}
+
+  /* --- consolidado a la tesorera --- */
+  .cta-flow{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;}
+  .cta-col{border:1px solid var(--line); border-radius:18px; background:var(--surface); box-shadow:var(--shadow);
+    padding:16px 18px;}
+  .cta-col.in{border-top:4px solid var(--pay);}
+  .cta-col.out{border-top:4px solid var(--get);}
+  .cf-hd{font-weight:900; font-size:.95rem; margin-bottom:10px;}
+  .cta-col.in .cf-hd{color:var(--pay);}
+  .cta-col.out .cf-hd{color:var(--get);}
+  .cta-col ul{list-style:none; margin:0; padding:0;}
+  .cta-col li{display:flex; align-items:center; gap:10px; padding:7px 0; border-bottom:1px dashed var(--line);
+    font-size:.87rem;}
+  .cta-col li span{flex:1 1 auto; min-width:0;}
+  .cta-col li b{flex:0 0 auto; font-variant-numeric:tabular-nums; font-weight:800;}
+  .cf-tot{margin-top:12px; padding-top:11px; border-top:2px solid var(--line); font-weight:900; font-size:.95rem;
+    display:flex; justify-content:space-between; gap:10px;}
+  .cf-tot b{font-variant-numeric:tabular-nums;}
+  .cta-col.in .cf-tot b{color:var(--pay);}
+  .cta-col.out .cf-tot b{color:var(--get);}
+  .cta-check{margin-top:14px; background:var(--surface-2); border:1px solid var(--line); border-radius:14px;
+    padding:14px 16px; font-size:.87rem; line-height:1.55;}
+
+  /* en pantallas muy angostas el nombre se pone encima del monto */
+  @media (max-width:400px){
+    .cta-per-hd{flex-wrap:wrap; row-gap:6px;}
+    .ph-n{flex:1 1 100%;}
+    .ph-amt{margin-left:auto;}
+    .cta-fam-hd{flex-wrap:wrap; row-gap:8px;}
+    .fh-txt{flex:1 1 60%;}
+  }
+
+  @media (max-width:520px){
+    .cta-fam-hd{padding:14px 14px; gap:10px;}
+    .fh-e{font-size:1.25rem;}
+    .fh-amt b{font-size:1.05rem;}
+    .mc-big b{font-size:2rem;}
+  }
+
+  /* --- cifra exacta de Splitwise bajo el monto a consignar --- */
+  .cta-exact{display:block; font-size:.82rem; font-weight:600; color:var(--ink-soft); margin-top:6px;}
+  .cta-exact b{display:inline; font-size:1rem; font-weight:800; font-variant-numeric:tabular-nums; color:var(--ink-soft);}
+  .cta-exact .aj{opacity:.8;}
+  .ph-x{display:block; font-size:.72rem; font-weight:600; color:var(--ink-soft); margin-top:2px;
+    font-variant-numeric:tabular-nums; overflow-wrap:anywhere;}
+  .cta-lines td.out{font-style:italic; font-size:.74rem;}
+  .cta-check + .cta-check{margin-top:10px;}
+
+/* CUENTAS:END */
+</style>
 </head>
 <body>
 <div class="bg-fx" aria-hidden="true">
@@ -897,6 +1085,11 @@
       <button type="button" class="hub-btn s-confirm" onclick="showView('confirmados')">
         <span class="ic">✅</span><span><span class="tt">Confirmados &amp; cuota</span><span class="ds">Los 18 cupos: alojamiento pagado y presupuesto</span></span><span class="go">›</span>
       </button>
+<!-- CUENTAS-HUB:START -->
+      <button type="button" class="hub-btn s-cuentas" onclick="showView('cuentas')">
+        <span class="ic">💰</span><span><span class="tt">Cuentas finales</span><span class="ds">Quién debe y quién recibe · liquidación real</span></span><span class="go">›</span>
+      </button>
+<!-- CUENTAS-HUB:END -->
       <button type="button" class="hub-btn s-logi" onclick="showView('logistica')">
         <span class="ic">🧭</span><span><span class="tt">Sugerencias</span><span class="ds">Plata, dónde comprar y consejos</span></span><span class="go">›</span>
       </button>
@@ -1177,6 +1370,17 @@
     <div class="how-note">🔄 El <b>mercado</b> es dinámico: si en el <b>🍽️ Planificador</b> cambian un plato, su presupuesto se recalcula solo (÷18). El <b>alojamiento no cambia</b> — ya se pagó. <button type="button" class="btn-reset" style="margin-left:6px;" onclick="showView('menu')">Abrir Planificador</button></div>
     <div id="confList"></div>
   </div>
+
+<!-- CUENTAS-VIEW:START -->
+  <!-- ============ CUENTAS FINALES ============ -->
+  <div id="view-cuentas" class="view s-cuentas">
+    <div class="backbar"><button type="button" onclick="showView('home')">← Volver al inicio</button></div>
+    <div class="sec-head"><h2>💰 Cuentas finales</h2></div>
+    <p class="sec-sub">Liquidación <b>real y definitiva</b> del paseo (18–20 jul 2026). Nada de esto es estimado: son los gastos que de verdad se hicieron. 🧾</p>
+    <div class="callout">📋 <b>Fuente:</b> grupo <b>“Paseo capitanejo”</b> de Splitwise — 25 gastos registrados entre el 17 y el 20 de julio, divididos entre las <b>18 personas</b> que aportan. Los valores están <b>redondeados al peso</b>, por eso pueden variar hasta $1 frente a la app. <b>Aparte va el alojamiento</b> ($100.000/persona), que ya estaba pagado.</div>
+    <div id="cuentasBody"></div>
+  </div>
+<!-- CUENTAS-VIEW:END -->
 
   <!-- ============ CÓMO ATACARLO ============ -->
   <div id="view-logistica" class="view s-logi">
@@ -1593,5 +1797,348 @@ var FOODIMG = {
 
 </script>
 
+<!-- CUENTAS-JS:START -->
+<script>
+/* ===== Cuentas finales · datos LITERALES de Splitwise (grupo "Paseo capitanejo") =====
+   Generado por gen_cuentas_data.py desde splitwise_raw.psv — NO editar a mano.
+   Todo en CENTAVOS ENTEROS. Los 18 saldos fueron validados uno a uno contra el
+   balance que reporta la API de Splitwise; el build falla si alguno no coincide.
+   `cons` = monto redondeado a peso para transferir de verdad; el residuo de
+   redondeo (2 pesos) lo asume Rochy por ser la tesorera. */
+window.CUENTAS = (function(){
+  var GASTOS = [
+    {d:"17 jul", n:"Desechables y bolsas", c:6610000, p:"rochy", e:"\ud83d\udecd\ufe0f"},
+    {d:"18 jul", n:"Cachamas", c:3850000, p:"hugo", e:"\ud83d\udc1f"},
+    {d:"18 jul", n:"D1 cachamas", c:4902000, p:"hugo", e:"\ud83d\uded2"},
+    {d:"18 jul", n:"Cachamas", c:5800000, p:"hugo", e:"\ud83d\udc1f"},
+    {d:"18 jul", n:"Carbón", c:4000000, p:"hugo", e:"\ud83d\udd25"},
+    {d:"18 jul", n:"Carne molida Hamburguesas", c:4800000, p:"sandro", e:"\ud83c\udf54"},
+    {d:"18 jul", n:"Hamburguesa salsas", c:2170000, p:"rochy", e:"\ud83e\udd6b"},
+    {d:"18 jul", n:"Galletas", c:2510000, p:"rochy", e:"\ud83c\udf6a"},
+    {d:"18 jul", n:"Hamburguesa d1", c:5390000, p:"hugo", e:"\ud83d\uded2"},
+    {d:"18 jul", n:"Cervezas", c:8500000, p:"sandro", e:"\ud83c\udf7a"},
+    {d:"19 jul", n:"Tamales", c:14400000, p:"sandro", e:"\ud83e\uded4"},
+    {d:"19 jul", n:"Pan", c:700000, p:"sandro", e:"\ud83c\udf5e"},
+    {d:"19 jul", n:"D1", c:7450000, p:"sandro", e:"\ud83d\uded2"},
+    {d:"19 jul", n:"Papa y manzanas", c:2100000, p:"sandro", e:"\ud83e\udd54"},
+    {d:"19 jul", n:"Lengua", c:3440400, p:"sandro", e:"\ud83c\udf7d\ufe0f"},
+    {d:"19 jul", n:"Cervezas", c:8500000, p:"sandro", e:"\ud83c\udf7a"},
+    {d:"20 jul", n:"Cachamas", c:12000000, p:"jimmy", e:"\ud83d\udc1f"},
+    {d:"20 jul", n:"Pan Zagú", c:3000000, p:"jimmy", e:"\ud83e\udd50"},
+    {d:"20 jul", n:"Cocina", c:1450000, p:"sandro", e:"\ud83c\udf73"},
+    {d:"20 jul", n:"Cocina", c:1385000, p:"sandro", e:"\ud83c\udf73"},
+    {d:"20 jul", n:"Frutas y verduras", c:520200, p:"sandro", e:"\ud83e\udd6c"},
+    {d:"20 jul", n:"D1 almuerzo lunes", c:6780000, p:"hugo", e:"\ud83d\uded2"},
+    {d:"20 jul", n:"Carnes", c:11000000, p:"hugo", e:"\ud83e\udd69"},
+    {d:"20 jul", n:"Verduras", c:1200000, p:"hugo", e:"\ud83e\udd55"},
+    {d:"20 jul", n:"Agua y mayonesa", c:1000000, p:"hugo", e:"\ud83d\udca7"},
+  ];
+  // parte de cada uno en cada gasto, en centavos (null = no participó)
+  var PARTES = {
+    hugo: [367222,213889,272333,322222,222223,266667,120556,139444,299444,531250,800000,38889,413889,116667,191133,531250,666667,166666,80555,76944,28900,376667,611111,66667,55555],
+    rochy: [367222,213889,272333,322222,222222,266666,120556,139444,299444,531250,800000,38889,413888,116667,191133,531250,666667,166667,80556,76944,28900,376667,611111,66667,55555],
+    mireya: [367222,213888,272333,322222,222222,266667,120556,139444,299444,531250,800000,38889,413889,116667,191133,531250,666667,166666,80556,76944,28900,376666,611111,66667,55555],
+    hans: [367222,213889,272334,322222,222222,266667,120555,139444,299445,531250,800000,38889,413889,116667,191133,531250,666667,166666,80555,76944,28900,376667,611111,66667,55556],
+    oliver: [367222,213889,272333,322222,222222,266667,120555,139444,299444,531250,800000,38889,413889,116667,191133,531250,666666,166667,80556,76945,28900,376667,611111,66666,55555],
+    arantza: [367222,213889,272333,322222,222222,266667,120555,139445,299445,null,800000,38889,413889,116667,191133,null,666666,166667,80555,76944,28900,376666,611111,66667,55556],
+    eloisa: [367223,213889,272333,322223,222222,266666,120555,139445,299444,531250,800000,38889,413889,116667,191134,531250,666667,166667,80555,76944,28900,376667,611111,66667,55556],
+    neyda: [367222,213889,272333,322223,222222,266667,120556,139445,299445,531250,800000,38889,413889,116667,191134,531250,666667,166666,80555,76945,28900,376666,611111,66667,55556],
+    sandro: [367223,213889,272334,322222,222222,266666,120556,139445,299445,531250,800000,38888,413889,116666,191134,531250,666667,166667,80556,76944,28900,376667,611111,66667,55556],
+    sergio: [367222,213889,272333,322222,222222,266667,120556,139444,299444,531250,800000,38889,413889,116667,191133,531250,666666,166667,80556,76944,28900,376667,611112,66666,55556],
+    marcela: [367222,213889,272334,322222,222222,266667,120555,139444,299445,531250,800000,38889,413889,116667,191134,531250,666666,166667,80556,76945,28900,376666,611111,66667,55556],
+    paula: [367223,213889,272333,322223,222222,266666,120555,139444,299444,531250,800000,38889,413889,116666,191133,531250,666667,166667,80556,76944,28900,376667,611111,66666,55555],
+    alexis: [367222,213889,272334,322222,222223,266666,120555,139445,299444,531250,800000,38889,413889,116666,191133,531250,666666,166667,80555,76945,28900,376667,611111,66667,55556],
+    salome: [367222,213888,272334,322222,222223,266667,120555,139444,299445,null,800000,38888,413889,116666,191133,null,666667,166667,80555,76945,28900,376666,611111,66666,55555],
+    jimmy: [367222,213889,272333,322222,222223,266667,120556,139444,299444,531250,800000,38889,413888,116667,191134,531250,666667,166666,80556,76945,28900,376667,611111,66666,55555],
+    alba: [367223,213889,272334,322222,222222,266667,120556,139445,299444,531250,800000,38889,413889,116667,191133,531250,666667,166667,80555,76945,28900,376666,611112,66666,55556],
+    daniela: [367222,213889,272333,322223,222222,266667,120556,139445,299445,531250,800000,38889,413889,116666,191133,531250,666667,166666,80556,76945,28900,376667,611111,66667,55555],
+    elcida: [367222,213889,272333,322222,222222,266666,120556,139445,299445,531250,800000,38889,413889,116666,191134,531250,666666,166667,80556,76944,28900,376667,611111,66667,55556],
+  };
+  var PERSONAS = [
+    {id:"hugo", n:"Hugo", ap:"Gómez", f:"gs", cons:369452},
+    {id:"rochy", n:"Rochy", ap:"Sánchez", f:"gs", cons:43130, nota:"asume el ajuste de redondeo del grupo ($2) por ser la tesorera"},
+    {id:"mireya", n:"Mireya", ap:"Peralta", f:"ps", cons:-69768},
+    {id:"hans", n:"Hans", ap:"Peralta", f:"ps", cons:-69768},
+    {id:"oliver", n:"Óliver", ap:"Peralta", f:"ps", cons:-69768},
+    {id:"arantza", n:"Arantza", ap:"Peralta", f:"ps", cons:-59143, nota:"no entró en las 2 rondas de cervezas 🍺"},
+    {id:"eloisa", n:"Eloisa", ap:"Delgado", f:"gs", cons:-69768},
+    {id:"neyda", n:"Neyda", ap:"Sánchez", f:"rs", cons:-69768},
+    {id:"sandro", n:"Sandro", ap:"Cendales", f:"cs", cons:462688},
+    {id:"sergio", n:"Sergio", ap:"Cendales", f:"cco", cons:-69768},
+    {id:"marcela", n:"Marcela", ap:"Contreras", f:"cco", cons:-69768},
+    {id:"paula", n:"Paula", ap:"Cacua", f:"cc", cons:-69768},
+    {id:"alexis", n:"Alexis", ap:"Cendales", f:"cc", cons:-69768},
+    {id:"salome", n:"Salomé y Joel", ap:"Rojas", f:"rs", cons:-59143, nota:"no entró en las 2 rondas de cervezas 🍺"},
+    {id:"jimmy", n:"Jimmy", ap:"Rojas", f:"rs", cons:80232},
+    {id:"alba", n:"Alba", ap:"Sánchez", f:"cs", cons:-69768},
+    {id:"daniela", n:"Daniela", ap:"Cendales", f:"cs", cons:-69768},
+    {id:"elcida", n:"Élcida", ap:"Rivera", f:"cs", cons:-69768},
+  ];
+  var FAMILIAS = {
+    cs:  {n:"Cendales Sánchez",   e:"🏠", c:"#0E8C86"},
+    gs:  {n:"Gómez Sánchez",      e:"🏡", c:"#D8761A"},
+    ps:  {n:"Peralta Sánchez",    e:"🏘️", c:"#2f86b4"},
+    rs:  {n:"Rojas Sánchez",      e:"🏚️", c:"#5C7C33"},
+    cc:  {n:"Cendales Cacua",     e:"🏛️", c:"#8a68a8"},
+    cco: {n:"Cendales Contreras", e:"🏯", c:"#c9971f"}
+  };
+  return {GASTOS:GASTOS, PARTES:PARTES, PERSONAS:PERSONAS, FAMILIAS:FAMILIAS, TESORERA:"rochy", RESIDUO:2};
+})();
+
+</script>
+<script>
+/* ============ Paseo 9 — Cuentas finales (liquidación Splitwise) ============
+   Vista independiente: no depende del planificador de menú ni del mercado.
+   Los datos salen de parts_cuentas_data.js, que se genera desde el volcado
+   literal de la API de Splitwise y se valida saldo por saldo en el build.
+   Todo se calcula en CENTAVOS ENTEROS — nunca en decimales. */
+(function(){
+  "use strict";
+  var C = window.CUENTAS; if(!C) return;
+
+  var G = C.GASTOS, SH = C.PARTES, TESO = C.TESORERA;
+  var TOTAL = G.reduce(function(a,g){ return a + g.c; }, 0);
+
+  function miles(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+  // centavos -> "$59.143,10" (cifra exacta, tal cual Splitwise)
+  function fmtC(c){
+    var neg = c < 0; c = Math.abs(c);
+    var d = c % 100;
+    return (neg ? "−$" : "$") + miles(Math.floor(c/100)) + "," + (d < 10 ? "0" : "") + d;
+  }
+  // pesos enteros -> "$59.143" (lo que de verdad se transfiere)
+  function fmtP(p){ return (p < 0 ? "−$" : "$") + miles(Math.abs(p)); }
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  // ---- saldo de cada persona, en centavos ----
+  var PER = C.PERSONAS.map(function(p){
+    var pagado = 0;
+    G.forEach(function(g){ if(g.p === p.id) pagado += g.c; });
+    var parte = SH[p.id].reduce(function(a,b){ return a + (b || 0); }, 0);
+    return {id:p.id, n:p.n, ap:p.ap, f:p.f, nota:p.nota,
+            paid:pagado, share:parte, net:pagado - parte,
+            cons:p.cons,                        // pesos redondeados a transferir
+            ajuste:p.cons * 100 - (pagado - parte)};
+  });
+  var P = {}; PER.forEach(function(x){ P[x.id] = x; });
+
+  var FAM = Object.keys(C.FAMILIAS).map(function(k){
+    var ms = PER.filter(function(x){ return x.f === k; });
+    var add = function(f){ return ms.reduce(function(a,b){ return a + b[f]; }, 0); };
+    return {k:k, n:C.FAMILIAS[k].n, e:C.FAMILIAS[k].e, c:C.FAMILIAS[k].c,
+            ms:ms, paid:add("paid"), share:add("share"), net:add("net"), cons:add("cons")};
+  }).sort(function(a,b){ return a.net - b.net; });
+
+  var DEUDORES   = PER.filter(function(x){ return x.cons < 0; }).sort(function(a,b){ return a.cons - b.cons; });
+  var ACREEDORES = PER.filter(function(x){ return x.cons > 0 && x.id !== TESO; }).sort(function(a,b){ return b.cons - a.cons; });
+  var RECAUDA  = DEUDORES.reduce(function(a,x){ return a - x.cons; }, 0);
+  var ENTREGA  = ACREEDORES.reduce(function(a,x){ return a + x.cons; }, 0);
+
+  function nombre(x){ return x.n + (x.ap ? " " + x.ap : ""); }
+  function badge(v){
+    if(v < 0) return '<span class="cta-badge pay">↑ debe pagar</span>';
+    if(v > 0) return '<span class="cta-badge get">↓ le devuelven</span>';
+    return '<span class="cta-badge nil">✓ a paz y salvo</span>';
+  }
+  // "$59.143,10" + qué hizo el redondeo, dicho sin ambigüedad.
+  // ajuste = saldo redondeado − saldo exacto. Si sube: el que debe paga menos,
+  // el que recibe cobra más. Si baja, al revés.
+  function exacto(x){
+    var h = '<span class="cta-exact">Saldo exacto en Splitwise: <b>' + fmtC(Math.abs(x.net)) + '</b>';
+    if(x.ajuste){
+      var debe = x.cons < 0, sube = x.ajuste > 0;
+      var verbo = debe ? "pagas " : "recibes ";
+      var dir = (debe ? !sube : sube) ? " más" : " menos";
+      h += ' <span class="aj">(' + verbo + fmtC(Math.abs(x.ajuste)) + dir + ')</span>';
+    }
+    return h + '</span>';
+  }
+
+  // ---------- detalle de los 25 gastos ----------
+  function lineas(id){
+    var x = P[id], h = "";
+    h += '<div class="cta-lines"><table><thead><tr>'
+       + '<th>Gasto</th><th class="num">Costo total</th><th class="num">Mi parte</th><th class="num">Puse yo</th>'
+       + '</tr></thead><tbody>';
+    G.forEach(function(g,k){
+      var mi = SH[id][k], puse = (g.p === id) ? g.c : 0;
+      h += '<tr' + (puse ? ' class="mine"' : '') + '>'
+         + '<td><span class="lg-e">' + g.e + '</span><span class="lg-n">' + esc(g.n) + '</span>'
+         + '<span class="lg-d">' + esc(g.d) + ' · pagó ' + esc(P[g.p].n) + '</span></td>'
+         + '<td class="num">' + fmtC(g.c) + '</td>'
+         + '<td class="num' + (mi === null ? ' out' : '') + '">' + (mi === null ? 'no participó' : fmtC(mi)) + '</td>'
+         + '<td class="num' + (puse ? ' pos' : ' zero') + '">' + (puse ? fmtC(puse) : '—') + '</td></tr>';
+    });
+    h += '</tbody><tfoot><tr><td>TOTALES</td><td class="num">' + fmtC(TOTAL) + '</td>'
+       + '<td class="num">' + fmtC(x.share) + '</td><td class="num">' + fmtC(x.paid) + '</td></tr></tfoot></table></div>';
+    h += '<div class="cta-eq ' + (x.net < 0 ? 'pay' : 'get') + '">'
+       + '<span>Puso <b>' + fmtC(x.paid) + '</b></span><span class="op">−</span>'
+       + '<span>Le corresponde <b>' + fmtC(x.share) + '</b></span>'
+       + '<span class="res"><span class="op">=</span> '
+       + (x.net < 0 ? 'debe <b>' + fmtC(-x.net) + '</b>' : 'recibe <b>' + fmtC(x.net) + '</b>') + '</span></div>';
+    if(x.nota) h += '<p class="cta-nota"><span class="cta-ic">ℹ️</span>' + esc(x.nota) + '</p>';
+    return h;
+  }
+
+  function tarjetaYo(id){
+    var x = P[id], f = C.FAMILIAS[x.f], debe = x.cons < 0;
+    var h = '<div class="cta-me-card ' + (debe ? 'pay' : 'get') + '">'
+      + '<div class="mc-top"><span class="mc-fam"><span class="cta-ic">' + f.e + '</span>' + esc(f.n) + '</span>'
+      + '<h3>' + esc(nombre(x)) + '</h3></div>'
+      + '<div class="mc-big"><span class="mc-lbl">'
+      + (debe ? 'Debes consignar a Rochy'
+              : (x.id === TESO ? 'Te queda a favor (lo recoges tú)' : 'Rochy te devuelve')) + '</span>'
+      + '<b>' + fmtP(Math.abs(x.cons)) + '</b>' + exacto(x) + '</div>'
+      + '<div class="mc-eq"><span>Pusiste <b>' + fmtC(x.paid) + '</b></span><span class="op">−</span>'
+      + '<span>Te corresponde <b>' + fmtC(x.share) + '</b></span></div>';
+    if(x.nota) h += '<p class="cta-nota"><span class="cta-ic">ℹ️</span>' + esc(x.nota) + '</p>';
+    h += '<div class="mc-acts">'
+      + '<button type="button" class="cta-btn" onclick="Cuentas.detalle(\'' + x.id + '\')"><span class="cta-ic">🧾</span>Ver mi detalle gasto por gasto</button>'
+      + '<button type="button" class="cta-btn wa" onclick="Cuentas.wa(\'' + x.id + '\')"><span class="cta-ic">📲</span>Enviar mi cuenta por WhatsApp</button>'
+      + '</div><div id="miDetalle" class="mc-det"></div></div>';
+    return h;
+  }
+
+  var API = {
+    toggle: function(el, panelId){
+      var pan = document.getElementById(panelId);
+      if(!pan) return;
+      // el detalle se arma la primera vez que se abre, no al cargar la página
+      var quien = pan.getAttribute("data-persona");
+      if(quien && !pan.innerHTML) pan.innerHTML = lineas(quien);
+      var abierto = pan.classList.toggle("open");
+      el.classList.toggle("open", abierto);
+      el.setAttribute("aria-expanded", abierto ? "true" : "false");
+    },
+    yo: function(id){
+      var box = document.getElementById("ctaYo");
+      if(box) box.innerHTML = tarjetaYo(id);
+      var chips = document.querySelectorAll("#ctaChips .cta-chip");
+      for(var i=0;i<chips.length;i++){ chips[i].classList.toggle("on", chips[i].getAttribute("data-id") === id); }
+      if(box) box.scrollIntoView({behavior:"smooth", block:"nearest"});
+    },
+    detalle: function(id){
+      var d = document.getElementById("miDetalle");
+      if(!d) return;
+      d.innerHTML = d.innerHTML ? "" : lineas(id);
+    },
+    wa: function(id){
+      var x = P[id], debe = x.cons < 0;
+      var msg = "🧾 *Cuentas finales · Paseo 9 Capitanejo* (18–20 jul 2026)\n\n"
+        + "*" + nombre(x) + "*\n"
+        + "• Pusiste: " + fmtC(x.paid) + "\n"
+        + "• Te corresponde: " + fmtC(x.share) + "\n"
+        + "• Saldo exacto (Splitwise): " + fmtC(Math.abs(x.net)) + "\n"
+        + (debe ? "👉 *Consigna " + fmtP(-x.cons) + "* a Rochy Sánchez (centro de costos)."
+                : (x.id === TESO ? "👉 *Te quedan " + fmtP(x.cons) + "* de lo que recaudes."
+                                 : "👉 *Rochy te devuelve " + fmtP(x.cons) + "*.")) + "\n\n"
+        + "Gasto total del paseo: " + fmtC(TOTAL) + " entre " + PER.length + " personas.";
+      window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+    }
+  };
+  window.Cuentas = API;
+
+  function render(){
+    var root = document.getElementById("cuentasBody"); if(!root) return;
+    var h = "";
+
+    h += '<div class="cta-stats">'
+       + '<div class="cta-stat"><span class="cs-e">🧾</span><b>' + fmtC(TOTAL) + '</b><span>gastado en total</span></div>'
+       + '<div class="cta-stat"><span class="cs-e">👥</span><b>' + PER.length + '</b><span>personas que aportan</span></div>'
+       + '<div class="cta-stat"><span class="cs-e">🏦</span><b>' + fmtP(RECAUDA) + '</b><span>que recauda Rochy</span></div>'
+       + '</div>';
+
+    h += '<div class="cta-block"><h3 class="cta-h"><span class="cta-ic">🙋</span>¿Yo cuánto pago?</h3>'
+       + '<p class="cta-p">Toca tu nombre y verás <b>exactamente</b> si debes pagar o si te devuelven. '
+       + 'Ojo: <b>no todos pagan lo mismo</b> — quien no entró a algún gasto paga menos.</p>'
+       + '<div id="ctaChips" class="cta-chips">';
+    PER.slice().sort(function(a,b){ return a.n.localeCompare(b.n,"es"); }).forEach(function(x){
+      h += '<button type="button" class="cta-chip ' + (x.cons < 0 ? 'pay' : 'get') + '" data-id="' + x.id + '"'
+         + ' onclick="Cuentas.yo(\'' + x.id + '\')">' + esc(x.n) + '</button>';
+    });
+    h += '</div><div id="ctaYo" class="cta-yo"></div></div>';
+
+    h += '<div class="cta-block"><h3 class="cta-h"><span class="cta-ic">👨‍👩‍👧‍👦</span>Tablero por familia</h3>'
+       + '<p class="cta-p">Saldo neto de cada familia. Toca una tarjeta para ver a sus integrantes, '
+       + 'y toca un integrante para ver su detalle gasto por gasto. '
+       + '<b>Cada persona liquida por separado</b> con Rochy — el total familiar es solo para ubicarse.</p>'
+       + '<div class="cta-fams">';
+    FAM.forEach(function(f){
+      var debe = f.cons < 0, pid = "fam-" + f.k;
+      h += '<div class="cta-fam ' + (debe ? 'pay' : 'get') + '" style="--fc:' + f.c + '">'
+         + '<button type="button" class="cta-fam-hd" aria-expanded="false" aria-controls="' + pid + '"'
+         + ' onclick="Cuentas.toggle(this,\'' + pid + '\')">'
+         + '<span class="fh-e">' + f.e + '</span>'
+         + '<span class="fh-txt"><span class="fh-n">' + esc(f.n) + '</span>'
+         + '<span class="fh-m">' + f.ms.length + ' integrante' + (f.ms.length > 1 ? 's' : '') + '</span></span>'
+         + '<span class="fh-amt">' + badge(f.cons) + '<b>' + fmtP(Math.abs(f.cons)) + '</b></span>'
+         + '<span class="fh-go">▾</span></button>'
+         + '<div id="' + pid + '" class="cta-fam-bd">'
+         + '<div class="cta-eq ' + (debe ? 'pay' : 'get') + '">'
+         + '<span>La familia puso <b>' + fmtC(f.paid) + '</b></span><span class="op">−</span>'
+         + '<span>Le corresponde <b>' + fmtC(f.share) + '</b></span>'
+         + '<span class="res"><span class="op">=</span> '
+         + (debe ? 'consigna <b>' + fmtC(-f.net) + '</b>' : 'recibe <b>' + fmtC(f.net) + '</b>') + '</span></div>'
+         + '<div class="cta-mem">';
+      f.ms.slice().sort(function(a,b){ return a.cons - b.cons; }).forEach(function(x){
+        var mid = "per-" + x.id;
+        h += '<div class="cta-per ' + (x.cons < 0 ? 'pay' : 'get') + '">'
+           + '<button type="button" class="cta-per-hd" aria-expanded="false" aria-controls="' + mid + '"'
+           + ' onclick="Cuentas.toggle(this,\'' + mid + '\')">'
+           + '<span class="ph-n">' + esc(nombre(x)) + '<span class="ph-x">' + fmtC(Math.abs(x.net)) + ' exacto</span></span>'
+           + '<span class="ph-amt">' + badge(x.cons) + '<b>' + fmtP(Math.abs(x.cons)) + '</b></span>'
+           + '<span class="fh-go">▾</span></button>'
+           + '<div id="' + mid + '" class="cta-per-bd" data-persona="' + x.id + '"></div></div>';
+      });
+      h += '</div></div></div>';
+    });
+    h += '</div></div>';
+
+    h += '<div class="cta-block"><h3 class="cta-h"><span class="cta-ic">🏦</span>Todo se consigna a Rochy</h3>'
+       + '<p class="cta-p"><b>Rochy Sánchez</b> es la <b>delegada centradora de costos</b> (la contadora de la familia). '
+       + 'Quien deba, le consigna a ella; ella le devuelve a quien puso de más. Así nadie hace 10 transferencias distintas.</p>'
+       + '<div class="cta-flow">';
+    h += '<div class="cta-col in"><div class="cf-hd"><span class="cta-ic">⬅️</span>Le consignan a Rochy</div><ul>';
+    DEUDORES.forEach(function(x){
+      h += '<li><span>' + esc(nombre(x)) + '</span><b>' + fmtP(-x.cons) + '</b></li>';
+    });
+    h += '</ul><div class="cf-tot"><span>Recauda</span><b>' + fmtP(RECAUDA) + '</b></div></div>';
+    h += '<div class="cta-col out"><div class="cf-hd"><span class="cta-ic">➡️</span>Rochy les devuelve</div><ul>';
+    ACREEDORES.forEach(function(x){
+      h += '<li><span>' + esc(nombre(x)) + '</span><b>' + fmtP(x.cons) + '</b></li>';
+    });
+    h += '</ul><div class="cf-tot"><span>Entrega</span><b>' + fmtP(ENTREGA) + '</b></div></div>';
+    h += '</div>';
+
+    h += '<div class="cta-check"><span class="cta-ic">✅</span><b>Cuadre:</b> recauda ' + fmtP(RECAUDA)
+       + ' − entrega ' + fmtP(ENTREGA) + ' = <b>' + fmtP(RECAUDA - ENTREGA) + '</b> para <b>Rochy</b>, '
+       + 'que es lo que a ella le deben por lo que puso (' + fmtC(P[TESO].net) + ' exactos). Todo cierra en <b>$0</b>.</div>';
+    h += '<div class="cta-check"><span class="cta-ic">🪙</span><b>Sobre los centavos:</b> las cifras de Splitwise traen decimales '
+       + '(ej. ' + fmtC(Math.abs(DEUDORES[0].net)) + '), pero <b>no se pueden transferir centavos</b>. Por eso cada monto se '
+       + 'redondea al peso y <b>Rochy asume el ajuste del grupo (' + fmtP(Math.abs(C.RESIDUO)) + ')</b>, de modo que la suma '
+       + 'sigue cerrando exacta. El saldo real de Splitwise aparece siempre debajo de cada cifra.</div>';
+    h += '</div>';
+
+    root.innerHTML = h;
+  }
+
+  // La barra naranja de arriba muestra el PRESUPUESTO ESTIMADO del menú; aquí
+  // contradice las cuentas reales, así que se oculta mientras se ve esta vista.
+  function barra(nombreVista){
+    var b = document.querySelector(".live-bar");
+    if(b) b.style.display = (nombreVista === "cuentas") ? "none" : "";
+  }
+  if(window.Paseo && typeof window.Paseo.show === "function"){
+    var orig = window.Paseo.show;
+    window.Paseo.show = function(n){ orig.call(window.Paseo, n); barra(n); };
+    window.showView = window.Paseo.show;
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", render);
+  else render();
+})();
+
+</script>
+<!-- CUENTAS-JS:END -->
 </body>
 </html>
